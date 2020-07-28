@@ -4,8 +4,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn --cwd packages/web-app dev",
-    "build": "yarn --cwd packages/web-app build",
-    "start": "yarn --cwd packages/web-app start"
+    "dev": "yarn --cwd packages/sendou-ink-web dev",
+    "build": "yarn --cwd packages/sendou-ink-web build",
+    "start": "yarn --cwd packages/sendou-ink-web start"
   }
 }
