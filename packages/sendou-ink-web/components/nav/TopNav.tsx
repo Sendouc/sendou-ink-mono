@@ -4,13 +4,7 @@ import ColorModeToggle from "./ColorModeToggle";
 
 const TopNav = () => {
   return (
-    <Flex
-      bg="bg.main"
-      w="100%"
-      alignItems="center"
-      justifyContent="space-between"
-      p={1}
-    >
+    <Flex w="100%" alignItems="center" justifyContent="space-between" p={1}>
       <ColorModeToggle />
       <Box color="gray.600" fontWeight="bold" letterSpacing={1}>
         sendou.ink

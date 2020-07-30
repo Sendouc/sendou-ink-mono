@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex, Image } from "@chakra-ui/core";
+import useBgColor from "utils/useBgColor";
 
 const icons = [
   { name: "builds" },
@@ -13,8 +14,9 @@ const icons = [
 ] as const;
 
 const IconNavBar = () => {
+  const bg = useBgColor();
   return (
-    <Flex bg="bg.secondary" justifyContent="center" py={2}>
+    <Flex bg={bg} justifyContent="center" py={2}>
       {icons.map(({ name }) => (
         <Image
           key={name}
