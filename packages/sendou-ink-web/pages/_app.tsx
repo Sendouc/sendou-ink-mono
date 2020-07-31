@@ -11,7 +11,7 @@ const styles: Styles = {
     ...theme.styles.global,
     fontFamily: "body",
     color: mode("blackAlpha.900", "whiteAlpha.900")(props),
-    bg: mode("gray.100", "#031e3e")(props),
+    bg: mode("gray.50", "#031e3e")(props),
   }),
 };
 
