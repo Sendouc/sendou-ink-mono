@@ -9,8 +9,8 @@ node_modules/
 /coverage
 
 # next.js
-/packages/sendou-ink-web/.next/
-/packages/sendou-ink-web/out/
+/packages/web-app/.next/
+/packages/web-app/out/
 
 # production
 /build
