@@ -4,8 +4,9 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn --cwd packages/sendou-ink-web dev",
-    "build": "yarn --cwd packages/sendou-ink-web build",
-    "start": "yarn --cwd packages/sendou-ink-web start"
+    "dev": "yarn workspace @sendou-ink/web-app dev",
+    "build": "yarn workspace @sendou-ink/web-app build",
+    "start": "yarn workspace @sendou-ink/web-app start",
+    "bot": "yarn workspace @sendou-ink/discord-bot ts-node index.ts"
   }
 }
