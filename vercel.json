@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "packages/sendou-ink-web/package.json", "use": "@now/next" }
-  ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/packages/sendou-ink-web/$1" }
-  ]
+  "builds": [{ "src": "packages/web-app/package.json", "use": "@now/next" }],
+  "rewrites": [{ "source": "/(.*)", "destination": "/packages/web-app/$1" }]
 }
