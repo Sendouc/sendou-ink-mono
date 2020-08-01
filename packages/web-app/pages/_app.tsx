@@ -9,7 +9,7 @@ const styles: Styles = {
   ...theme.styles,
   global: (props) => ({
     ...theme.styles.global,
-    fontFamily: "body",
+    //fontFamily: "body",
     color: mode("blackAlpha.900", "whiteAlpha.900")(props),
     bg: mode("gray.50", "#031e3e")(props),
   }),
@@ -19,11 +19,11 @@ const customTheme: any = {
   ...theme,
   //https://github.com/chakra-ui/chakra-ui/issues/1278
   breakpoints: ["30em", "48em", "62em", "80em"] as any,
-  fonts: {
+  /*fonts: {
     ...theme.fonts,
-    body: `"Inter",${theme.fonts.body}`,
-    heading: `"Inter",${theme.fonts.heading}`,
-  },
+    body: `"Rubik",${theme.fonts.body}`,
+    heading: `"Rubik",${theme.fonts.heading}`,
+  },*/
   config: {
     ...theme.config,
     useSystemColorMode: true,
@@ -35,7 +35,7 @@ const customTheme: any = {
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
-      <GoogleFonts href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+      {/*<GoogleFonts href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" />*/}
       <CSSReset />
       <Layout>
         <Component {...pageProps} />

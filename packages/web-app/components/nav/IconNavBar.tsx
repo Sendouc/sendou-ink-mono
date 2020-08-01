@@ -20,8 +20,8 @@ const IconNavBar = () => {
       {icons.map(({ name }) => (
         <Image
           key={name}
-          src={`/images/${name}.webp`}
-          fallbackSrc={`/images/${name}.png`}
+          src={`/images/navIcons/${name}.webp`}
+          fallbackSrc={`/images/navIcons/${name}.png`}
           h={12}
           w={12}
           mx={2}
