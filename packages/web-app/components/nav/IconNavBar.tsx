@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Image } from "@chakra-ui/core";
+import { Flex, Image, Link } from "@chakra-ui/core";
 import useBgColor from "utils/useBgColor";
 
 const icons = [
@@ -18,8 +18,8 @@ const IconNavBar = () => {
   return (
     <Flex bg={bg} justifyContent="center" py={2}>
       {icons.map(({ name }) => (
+        <Link key={name} href={"/" + name}>
         <Image
-          key={name}
           src={`/images/navIcons/${name}.webp`}
           fallbackSrc={`/images/navIcons/${name}.png`}
           h={12}
@@ -27,6 +27,7 @@ const IconNavBar = () => {
           mx={2}
           alt={name}
         />
+        </Link>
       ))}
     </Flex>
   );
