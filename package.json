@@ -8,8 +8,5 @@
     "build": "yarn workspace @sendou-ink/web-app build",
     "start": "yarn workspace @sendou-ink/web-app start",
     "bot": "yarn workspace @sendou-ink/discord-bot ts-node index.ts"
-  },
-  "dependencies": {
-    "@types/react": "16.9.44"
   }
 }

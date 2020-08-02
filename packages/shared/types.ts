@@ -10,4 +10,4 @@ type ElementType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<
 export type Weapon = ElementType<typeof weapons>;
 export type Stage = ElementType<typeof stages>;
 
-export type Mode = "SZ" | "TC" | "RM" | "CB";
+export type RankedMode = "SZ" | "TC" | "RM" | "CB";
