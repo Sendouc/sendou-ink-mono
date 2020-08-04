@@ -1,21 +1,29 @@
-import { Box, Flex, Wrap } from "@chakra-ui/core";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ButtonGroup, Flex } from "@chakra-ui/core";
+import { RankedMode, Stage, Weapon } from "@sendou-ink/shared";
+import { stages } from "@sendou-ink/shared/constants/stages";
+import MyButton from "components/common/MyButton";
+import PageHeader from "components/common/PageHeader";
+import StageSelector from "components/plans/StageSelector";
+import { NextPage } from "next";
+import dynamic from "next/dynamic";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FaBomb,
   FaFileDownload,
   FaFileImage,
   FaFileUpload,
 } from "react-icons/fa";
-import { Stage, Weapon, Mode } from "@sendou-ink/shared";
-import MyButton from "components/common/MyButton";
-import { NextPage } from "next";
-import dynamic from "next/dynamic";
-import StageSelector from "components/plans/StageSelector";
-import { stages } from "@sendou-ink/shared/constants/stages";
 
 const MapSketch = dynamic(() => import("components/plans/MapSketch"), {
   ssr: false,
 });
+
+const DraggableToolsSelector = dynamic(
+  () => import("components/plans/DraggableToolsSelector"),
+  {
+    ssr: false,
+  }
+);
 
 export interface PlannerMapBg {
   view?: "M" | "R";
@@ -162,6 +170,7 @@ const defaultValue = {
 const MapPlannerPage: NextPage = () => {
   const fileInput = useRef<HTMLInputElement | null>(null);
   const sketch = useRef<any>(null);
+  const [tool, setTool] = useState<any>("");
   const [color, setColor] = useState("#f44336");
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
@@ -295,7 +304,7 @@ const MapPlannerPage: NextPage = () => {
 
   return (
     <>
-      {/*<PageHeader title={t("navigation;Map Planner")} />
+      <PageHeader title="Map Planner" />
       <DraggableToolsSelector
         tool={tool}
         setTool={setTool}
@@ -304,12 +313,11 @@ const MapPlannerPage: NextPage = () => {
         undo={undo}
         undoIsDisabled={!canUndo}
         removeSelected={removeSelected}
-        removeIsDisabled={tool !== Tools.Select}
         addText={addTextToSketch}
         color={color}
         setColor={(newColor) => setColor(newColor)}
       />
-      <Box ml="950px">
+      {/*<Box ml="950px">
         <DraggableWeaponSelector
           addWeaponImage={(weapon) => addImageToSketch(weapon)}
         />
@@ -320,7 +328,7 @@ const MapPlannerPage: NextPage = () => {
         color={color}
         onSketchChange={onSketchChange}
       />
-      <Wrap my={1}>
+      <Flex my={1} justifyContent="space-between">
         <MyButton
           onClick={() => {
             sketch.current.clear();
@@ -328,31 +336,35 @@ const MapPlannerPage: NextPage = () => {
           }}
           leftIcon={<FaBomb />}
           colorScheme="red"
+          size="sm"
+          variant="outline"
         >
           Clear drawings
         </MyButton>
-        <MyButton
-          onClick={() => download(sketch.current.toDataURL(), "png")}
-          leftIcon={<FaFileImage />}
-        >
-          Download as .png
-        </MyButton>
-        <MyButton
-          onClick={() =>
-            download(
-              "data:text/json;charset=utf-8," +
-                encodeURIComponent(JSON.stringify(sketch.current.toJSON())),
-              "json"
-            )
-          }
-          leftIcon={<FaFileDownload />}
-        >
-          Download as .json
-        </MyButton>
-        <MyButton onClick={() => handleUpload()} leftIcon={<FaFileUpload />}>
-          Load from .json
-        </MyButton>
-      </Wrap>
+        <ButtonGroup variant="outline" size="sm" isAttached>
+          <MyButton
+            onClick={() => download(sketch.current.toDataURL(), "png")}
+            leftIcon={<FaFileImage />}
+          >
+            Download as .png
+          </MyButton>
+          <MyButton
+            onClick={() =>
+              download(
+                "data:text/json;charset=utf-8," +
+                  encodeURIComponent(JSON.stringify(sketch.current.toJSON())),
+                "json"
+              )
+            }
+            leftIcon={<FaFileDownload />}
+          >
+            Download as .json
+          </MyButton>
+          <MyButton onClick={() => handleUpload()} leftIcon={<FaFileUpload />}>
+            Load from .json
+          </MyButton>
+        </ButtonGroup>
+      </Flex>
       <StageSelector
         handleChange={(e) => {
           const newStage = e.target.value;
@@ -372,7 +384,8 @@ const MapPlannerPage: NextPage = () => {
           setBg({ stage: e.target.value as Stage, mode: "SZ", view: "M" });
         }}
         currentBackground={bg}
-        changeMode={(mode: Mode) => setBg({ ...bg, mode })}
+        changeMode={(mode: RankedMode) => setBg({ ...bg, mode })}
+        changeTide={(tide: "low" | "mid" | "high") => setBg({ ...bg, tide })}
       />
       <input
         type="file"

@@ -2,24 +2,28 @@ import React from "react";
 import { stages } from "@sendou-ink/shared/constants/stages";
 import { PlannerMapBg } from "pages/plans";
 import ModeImage from "components/common/ModeImage";
-import { HStack } from "@chakra-ui/core";
-import { Mode } from "@sendou-ink/shared";
+import { HStack, Select, Image } from "@chakra-ui/core";
+import { RankedMode } from "@sendou-ink/shared";
+import salmonRunHighTide from "icons/SalmonRunHighTide.svg";
+import salmonRunMidTide from "icons/SalmonRunMidTide.svg";
+import salmonRunLowTide from "icons/SalmonRunLowTide.svg";
 
 interface StageSelectorProps {
   handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   currentBackground: PlannerMapBg;
-  changeMode: (mode: Mode) => void;
-  //changeTide: (tide) => void
+  changeMode: (mode: RankedMode) => void;
+  changeTide: (tide: "low" | "mid" | "high") => void;
 }
 
 const StageSelector: React.FC<StageSelectorProps> = ({
   handleChange,
   currentBackground,
   changeMode,
+  changeTide,
 }) => {
   return (
     <>
-      <select placeholder="Change background" onChange={handleChange}>
+      <Select placeholder="Change background" onChange={handleChange}>
         {stages.map((stage) => (
           <option key={stage} value={stage}>
             {stage}
@@ -30,16 +34,60 @@ const StageSelector: React.FC<StageSelectorProps> = ({
         <option value="Lost Outpost">Lost Outpost</option>
         <option value="Salmonid Smokeyard">Salmonid Smokeyard</option>
         <option value="Ruins of Ark Polaris‎‎">Ruins of Ark Polaris‎‎</option>
-      </select>
-      {currentBackground.tide ? null : (
+      </Select>
+      {currentBackground.tide ? (
+        <>
+          <HStack>
+            <Image
+              w={8}
+              h={8}
+              src={salmonRunLowTide}
+              cursor="pointer"
+              style={{
+                filter:
+                  currentBackground.tide === "low"
+                    ? undefined
+                    : "grayscale(100%)",
+              }}
+              onClick={() => changeTide("low")}
+            />
+            <Image
+              w={8}
+              h={8}
+              src={salmonRunMidTide}
+              cursor="pointer"
+              style={{
+                filter:
+                  currentBackground.tide === "mid"
+                    ? undefined
+                    : "grayscale(100%)",
+              }}
+              onClick={() => changeTide("mid")}
+            />
+            <Image
+              w={8}
+              h={8}
+              src={salmonRunHighTide}
+              cursor="pointer"
+              style={{
+                filter:
+                  currentBackground.tide === "high"
+                    ? undefined
+                    : "grayscale(100%)",
+              }}
+              onClick={() => changeTide("high")}
+            />
+          </HStack>
+        </>
+      ) : (
         <HStack>
-          {(["SZ", "TC", "RM", "CB"] as Mode[]).map((mode) => (
+          {(["SZ", "TC", "RM", "CB"] as RankedMode[]).map((mode) => (
             <ModeImage
               key={mode}
               onClick={() => changeMode(mode)}
               mode={mode}
-              h={8}
               w={8}
+              h={8}
               cursor="pointer"
               style={{
                 filter:

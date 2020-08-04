@@ -17,8 +17,6 @@ const styles: Styles = {
 
 const customTheme: any = {
   ...theme,
-  //https://github.com/chakra-ui/chakra-ui/issues/1278
-  breakpoints: ["30em", "48em", "62em", "80em"] as any,
   /*fonts: {
     ...theme.fonts,
     body: `"Rubik",${theme.fonts.body}`,

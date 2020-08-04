@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <TopNav />
       <IconNavBar />
-      <Box p={4} maxW="64rem" mx="auto">
+      <Box p={4} maxW="75rem" mx="auto">
         {children}
       </Box>
     </>
