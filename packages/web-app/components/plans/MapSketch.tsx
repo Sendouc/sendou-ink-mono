@@ -16,7 +16,6 @@ const MapSketch: React.FC<MapSketchProps> = ({
   onSketchChange,
   tool,
 }) => {
-  return null;
   return (
     <SketchField
       name="sketch"
