@@ -35,8 +35,9 @@ const PlannerColorPicker: React.FC<PlannerColorPickerProps> = ({
   setColor,
 }) => {
   const bg = useBgColor();
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <Popover placement="bottom">
+    <Popover placement="bottom" isOpen={isOpen}>
       <PopoverTrigger>
         <Box
           cursor="pointer"
@@ -47,13 +48,17 @@ const PlannerColorPicker: React.FC<PlannerColorPickerProps> = ({
           display="inline-block"
           mr="11px"
           ml="10px"
+          onClick={() => setIsOpen(true)}
         />
       </PopoverTrigger>
       <PopoverContent zIndex={4} width="260px" backgroundColor={bg}>
         <PopoverBody textAlign="center">
           <CirclePicker
             width="260px"
-            onChangeComplete={(color: ColorResult) => setColor(color.hex)}
+            onChangeComplete={(color: ColorResult) => {
+              setColor(color.hex);
+              setIsOpen(false);
+            }}
           />
         </PopoverBody>
       </PopoverContent>

@@ -23,7 +23,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
   changeTide,
 }) => {
   return (
-    <Box maxW="20rem" m="1rem auto">
+    <Box maxW="20rem" m="3rem auto">
       <MySelect placeholder="Change background" onChange={handleChange}>
         {stages.map((stage) => (
           <option key={stage} value={stage}>
@@ -38,7 +38,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
       </MySelect>
       {currentBackground.tide ? (
         <>
-          <HStack>
+          <HStack my={2} display="flex" justifyContent="center">
             <Image
               w={8}
               h={8}
@@ -81,7 +81,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
           </HStack>
         </>
       ) : (
-        <HStack>
+        <HStack my={2} display="flex" justifyContent="center">
           {(["SZ", "TC", "RM", "CB"] as RankedMode[]).map((mode) => (
             <ModeImage
               key={mode}

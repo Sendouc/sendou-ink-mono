@@ -327,8 +327,9 @@ const MapPlannerPage: NextPage = () => {
         controlledValue={controlledValue}
         color={color}
         onSketchChange={onSketchChange}
+        tool={tool}
       />
-      <Flex my={1} justifyContent="space-between">
+      <Flex my={2} justifyContent="space-between">
         <MyButton
           onClick={() => {
             sketch.current.clear();

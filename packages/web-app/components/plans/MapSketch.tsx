@@ -6,6 +6,7 @@ interface MapSketchProps {
   controlledValue: any;
   onSketchChange: any;
   color: any;
+  tool: any;
 }
 
 const MapSketch: React.FC<MapSketchProps> = ({
@@ -13,9 +14,8 @@ const MapSketch: React.FC<MapSketchProps> = ({
   controlledValue,
   color,
   onSketchChange,
+  tool,
 }) => {
-  const [tool, setTool] = useState(Tools.RectangleLabel);
-
   return (
     <SketchField
       name="sketch"
