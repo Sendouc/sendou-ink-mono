@@ -1,4 +1,4 @@
-import { ButtonGroup, Flex } from "@chakra-ui/core";
+import { ButtonGroup, Flex, Box } from "@chakra-ui/core";
 import { RankedMode, Stage, Weapon } from "@sendou-ink/shared";
 import { stages } from "@sendou-ink/shared/constants/stages";
 import MyButton from "components/common/MyButton";
@@ -13,6 +13,7 @@ import {
   FaFileImage,
   FaFileUpload,
 } from "react-icons/fa";
+import DraggableWeaponSelector from "components/plans/DraggableWeaponSelector";
 
 const MapSketch = dynamic(() => import("components/plans/MapSketch"), {
   ssr: false,
@@ -317,11 +318,9 @@ const MapPlannerPage: NextPage = () => {
         color={color}
         setColor={(newColor) => setColor(newColor)}
       />
-      {/*<Box ml="950px">
-        <DraggableWeaponSelector
-          addWeaponImage={(weapon) => addImageToSketch(weapon)}
-        />
-      </Box>*/}
+      <DraggableWeaponSelector
+        addWeaponImage={(weapon) => addImageToSketch(weapon)}
+      />
       <MapSketch
         sketch={sketch}
         controlledValue={controlledValue}
