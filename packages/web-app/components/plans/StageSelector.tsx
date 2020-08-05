@@ -2,11 +2,12 @@ import React from "react";
 import { stages } from "@sendou-ink/shared/constants/stages";
 import { PlannerMapBg } from "pages/plans";
 import ModeImage from "components/common/ModeImage";
-import { HStack, Select, Image } from "@chakra-ui/core";
+import { HStack, Image, Box } from "@chakra-ui/core";
 import { RankedMode } from "@sendou-ink/shared";
 import salmonRunHighTide from "icons/SalmonRunHighTide.svg";
 import salmonRunMidTide from "icons/SalmonRunMidTide.svg";
 import salmonRunLowTide from "icons/SalmonRunLowTide.svg";
+import { MySelect } from "components/common/MySelect";
 
 interface StageSelectorProps {
   handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -22,8 +23,8 @@ const StageSelector: React.FC<StageSelectorProps> = ({
   changeTide,
 }) => {
   return (
-    <>
-      <Select placeholder="Change background" onChange={handleChange}>
+    <Box maxW="20rem" m="1rem auto">
+      <MySelect placeholder="Change background" onChange={handleChange}>
         {stages.map((stage) => (
           <option key={stage} value={stage}>
             {stage}
@@ -34,7 +35,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
         <option value="Lost Outpost">Lost Outpost</option>
         <option value="Salmonid Smokeyard">Salmonid Smokeyard</option>
         <option value="Ruins of Ark Polaris‎‎">Ruins of Ark Polaris‎‎</option>
-      </Select>
+      </MySelect>
       {currentBackground.tide ? (
         <>
           <HStack>
@@ -99,7 +100,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
           ))}
         </HStack>
       )}
-    </>
+    </Box>
   );
 };
 

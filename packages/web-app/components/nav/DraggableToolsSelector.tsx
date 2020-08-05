@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react"
-import Draggable from "react-draggable"
-import { Tools } from "@sendou/react-sketch"
-import { useHotkeys } from "react-hotkeys-hook"
+import React, { useState, useContext } from "react";
+import Draggable from "react-draggable";
+import { Tools } from "@sendou/react-sketch";
+import { useHotkeys } from "react-hotkeys-hook";
 import {
   Box,
   Flex,
@@ -10,7 +10,7 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverBody,
-} from "@chakra-ui/core"
+} from "@chakra-ui/core";
 import {
   FaPencilAlt,
   FaRegSquare,
@@ -20,21 +20,21 @@ import {
   FaRedo,
   FaUndo,
   FaFont,
-} from "react-icons/fa"
-import { AiOutlineLine } from "react-icons/ai"
-import { CirclePicker, ColorResult } from "react-color"
-import useBgColor from "utils/useBgColor"
+} from "react-icons/fa";
+import { AiOutlineLine } from "react-icons/ai";
+import { CirclePicker, ColorResult } from "react-color";
+import useBgColor from "utils/useBgColor";
 
 interface PlannerColorPickerProps {
-  color: string
-  setColor: (newColor: string) => void
+  color: string;
+  setColor: (newColor: string) => void;
 }
 
 const PlannerColorPicker: React.FC<PlannerColorPickerProps> = ({
   color,
   setColor,
 }) => {
-    const bg = useBgColor()
+  const bg = useBgColor();
   return (
     <Popover placement="bottom">
       <PopoverTrigger>
@@ -58,21 +58,21 @@ const PlannerColorPicker: React.FC<PlannerColorPickerProps> = ({
         </PopoverBody>
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};
 
 interface DraggableToolsSelectorProps {
-  tool: any
-  setTool: React.Dispatch<any>
-  redo: () => void
-  redoIsDisabled: boolean
-  undo: () => void
-  undoIsDisabled: boolean
-  removeSelected: () => void
-  removeIsDisabled: boolean
-  addText: () => void
-  color: string
-  setColor: (newColor: string) => void
+  tool: any;
+  setTool: React.Dispatch<any>;
+  redo: () => void;
+  redoIsDisabled: boolean;
+  undo: () => void;
+  undoIsDisabled: boolean;
+  removeSelected: () => void;
+  removeIsDisabled: boolean;
+  addText: () => void;
+  color: string;
+  setColor: (newColor: string) => void;
 }
 
 const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
@@ -88,21 +88,21 @@ const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
   color,
   setColor,
 }) => {
-  const bg = useBgColor()
-  const [activeDrags, setActiveDrags] = useState(0)
-  useHotkeys("p", () => setTool(Tools.Pencil))
-  useHotkeys("l", () => setTool(Tools.Line))
-  useHotkeys("r", () => setTool(Tools.Rectangle))
-  useHotkeys("c", () => setTool(Tools.Circle))
-  useHotkeys("s", () => setTool(Tools.Select))
+  const bg = useBgColor();
+  const [activeDrags, setActiveDrags] = useState(0);
+  useHotkeys("p", () => setTool(Tools.Pencil));
+  useHotkeys("l", () => setTool(Tools.Line));
+  useHotkeys("r", () => setTool(Tools.Rectangle));
+  useHotkeys("c", () => setTool(Tools.Circle));
+  useHotkeys("s", () => setTool(Tools.Select));
 
   const onStart = () => {
-    setActiveDrags(activeDrags + 1)
-  }
+    setActiveDrags(activeDrags + 1);
+  };
 
   const onStop = () => {
-    setActiveDrags(activeDrags - 1)
-  }
+    setActiveDrags(activeDrags - 1);
+  };
 
   return (
     <Draggable handle="strong" onStart={onStart} onStop={onStop}>
@@ -216,7 +216,7 @@ const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
         </Flex>
       </Box>
     </Draggable>
-  )
-}
+  );
+};
 
-export default DraggableToolsSelector
+export default DraggableToolsSelector;
