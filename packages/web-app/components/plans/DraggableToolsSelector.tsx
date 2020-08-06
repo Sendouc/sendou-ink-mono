@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Draggable from "react-draggable";
-import { Tools } from "@sendou/react-sketch";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
   Box,
@@ -24,6 +23,7 @@ import {
 import { AiOutlineLine } from "react-icons/ai";
 import { CirclePicker, ColorResult } from "react-color";
 import useBgColor from "utils/useBgColor";
+import { Tool } from "pages/plans";
 
 interface PlannerColorPickerProps {
   color: string;
@@ -67,8 +67,8 @@ const PlannerColorPicker: React.FC<PlannerColorPickerProps> = ({
 };
 
 interface DraggableToolsSelectorProps {
-  tool: any;
-  setTool: React.Dispatch<any>;
+  tool: Tool;
+  setTool: React.Dispatch<Tool>;
   redo: () => void;
   redoIsDisabled: boolean;
   undo: () => void;
@@ -93,11 +93,11 @@ const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
 }) => {
   const bg = useBgColor();
   const [activeDrags, setActiveDrags] = useState(0);
-  useHotkeys("p", () => setTool(Tools.Pencil));
-  useHotkeys("l", () => setTool(Tools.Line));
-  useHotkeys("r", () => setTool(Tools.Rectangle));
-  useHotkeys("c", () => setTool(Tools.Circle));
-  useHotkeys("s", () => setTool(Tools.Select));
+  useHotkeys("p", () => setTool("pencil"));
+  useHotkeys("l", () => setTool("line"));
+  useHotkeys("r", () => setTool("rectangle"));
+  useHotkeys("c", () => setTool("circle"));
+  useHotkeys("s", () => setTool("select"));
 
   const onStart = () => {
     setActiveDrags(activeDrags + 1);
@@ -129,58 +129,58 @@ const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
         </strong>
         <Flex flexWrap="wrap" justifyContent="center">
           <IconButton
-            onClick={() => setTool(Tools.Pencil)}
+            onClick={() => setTool("pencil")}
             variant="ghost"
             size="lg"
             aria-label="Pencil (P)"
             icon={<FaPencilAlt />}
-            border={tool === Tools.Pencil ? "2px solid" : undefined}
+            border={tool === "pencil" ? "2px solid" : undefined}
             borderColor={bg}
             title="Pencil (P)"
           />
           <IconButton
-            onClick={() => setTool(Tools.Line)}
+            onClick={() => setTool("line")}
             variant="ghost"
             size="lg"
             aria-label="Line (L)"
             icon={<AiOutlineLine />}
-            border={tool === Tools.Line ? "2px solid" : undefined}
+            border={tool === "line" ? "2px solid" : undefined}
             borderColor={bg}
             title="Line (L)"
           />
           <IconButton
-            onClick={() => setTool(Tools.Rectangle)}
+            onClick={() => setTool("rectangle")}
             variant="ghost"
             size="lg"
             aria-label="Rectangle (R)"
             icon={<FaRegSquare />}
-            border={tool === Tools.Rectangle ? "2px solid" : undefined}
+            border={tool === "rectangle" ? "2px solid" : undefined}
             borderColor={bg}
             title="Rectangle (R)"
           />
           <IconButton
-            onClick={() => setTool(Tools.Circle)}
+            onClick={() => setTool("circle")}
             variant="ghost"
             size="lg"
             aria-label="Circle (C)"
             icon={<FaRegCircle />}
-            border={tool === Tools.Circle ? "2px solid" : undefined}
+            border={tool === "circle" ? "2px solid" : undefined}
             borderColor={bg}
             title="Circle (C)"
           />
           <IconButton
-            onClick={() => setTool(Tools.Select)}
+            onClick={() => setTool("select")}
             variant="ghost"
             size="lg"
             aria-label="Select (S)"
             icon={<FaRegObjectGroup />}
-            border={tool === Tools.Select ? "2px solid" : undefined}
+            border={tool === "select" ? "2px solid" : undefined}
             borderColor={bg}
             title="Select (S)"
           />
           <IconButton
             onClick={() => removeSelected()}
-            isDisabled={tool !== Tools.Select}
+            isDisabled={tool !== "select"}
             variant="ghost"
             size="lg"
             aria-label="Delete selected"
@@ -208,6 +208,7 @@ const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
           <IconButton
             onClick={() => addText()}
             variant="ghost"
+            s
             size="lg"
             aria-label="Add text"
             icon={<FaFont />}

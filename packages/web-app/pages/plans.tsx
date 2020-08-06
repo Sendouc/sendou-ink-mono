@@ -14,17 +14,13 @@ import {
   FaFileUpload,
 } from "react-icons/fa";
 import DraggableImageAdder from "components/plans/DraggableImageAdder";
+import DraggableToolsSelector from "components/plans/DraggableToolsSelector";
 
 const MapSketch = dynamic(() => import("components/plans/MapSketch"), {
   ssr: false,
 });
 
-const DraggableToolsSelector = dynamic(
-  () => import("components/plans/DraggableToolsSelector"),
-  {
-    ssr: false,
-  }
-);
+export type Tool = "pencil" | "line" | "rectangle" | "circle" | "select";
 
 export interface PlannerMapBg {
   view?: "M" | "R";
@@ -171,7 +167,7 @@ const defaultValue = {
 const MapPlannerPage: NextPage = () => {
   const fileInput = useRef<HTMLInputElement | null>(null);
   const sketch = useRef<any>(null);
-  const [tool, setTool] = useState<any>("");
+  const [tool, setTool] = useState<Tool>("pencil");
   const [color, setColor] = useState("#f44336");
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
@@ -180,6 +176,7 @@ const MapPlannerPage: NextPage = () => {
 
   const addImageToSketch = (imgSrc: string) => {
     sketch.current.addImg(imgSrc);
+    setTool("select");
   };
 
   const addTextToSketch = () => {
@@ -190,6 +187,7 @@ const MapPlannerPage: NextPage = () => {
       strokeWidth: 3,
       paintFirst: "stroke",
     });
+    setTool("select");
   };
 
   const undo = () => {
