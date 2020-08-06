@@ -1,4 +1,4 @@
-import { SketchField } from "@sendou/react-sketch";
+import { SketchField, Tools } from "@sendou/react-sketch";
 
 interface MapSketchProps {
   sketch: any;
@@ -26,7 +26,7 @@ const MapSketch: React.FC<MapSketchProps> = ({
       height={634}
       value={controlledValue}
       onChange={onSketchChange}
-      tool={tool ?? undefined}
+      tool={tool ?? Tools.Pencil}
       style={{ position: "relative", left: "-27px" }}
     />
   );
