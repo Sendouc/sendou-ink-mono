@@ -208,7 +208,6 @@ const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
           <IconButton
             onClick={() => addText()}
             variant="ghost"
-            s
             size="lg"
             aria-label="Add text"
             icon={<FaFont />}
