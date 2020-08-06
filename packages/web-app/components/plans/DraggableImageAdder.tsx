@@ -5,12 +5,12 @@ import { Box, Flex, Image } from "@chakra-ui/core";
 import { weapons, Weapon } from "@sendou-ink/shared";
 import useBgColor from "utils/useBgColor";
 
-interface DraggableWeaponSelector {
-  addWeaponImage: (imgSrc: string) => void;
+interface DraggableImageAdderProps {
+  addImageToSketch: (imgSrc: string) => void;
 }
 
-const DraggableWeaponSelector: React.FC<DraggableWeaponSelector> = ({
-  addWeaponImage,
+const DraggableImageAdder: React.FC<DraggableImageAdderProps> = ({
+  addImageToSketch,
 }) => {
   const bg = useBgColor();
   const [activeDrags, setActiveDrags] = useState(0);
@@ -52,7 +52,9 @@ const DraggableWeaponSelector: React.FC<DraggableWeaponSelector> = ({
               <WeaponImage
                 key={wpn}
                 onClick={() =>
-                  addWeaponImage(`/images/weapons/${wpn.replace(".", "")}.png`)
+                  addImageToSketch(
+                    `/images/weapons/${wpn.replace(".", "")}.png`
+                  )
                 }
                 name={wpn}
                 w={8}
@@ -67,7 +69,7 @@ const DraggableWeaponSelector: React.FC<DraggableWeaponSelector> = ({
                 return (
                   <Image
                     key={grizzcoWeaponClass}
-                    onClick={() => addWeaponImage(imgSrc)}
+                    onClick={() => addImageToSketch(imgSrc)}
                     src={imgSrc}
                     w={8}
                     h={8}
@@ -82,7 +84,7 @@ const DraggableWeaponSelector: React.FC<DraggableWeaponSelector> = ({
               return (
                 <Image
                   key={mode}
-                  onClick={() => addWeaponImage(imgSrc)}
+                  onClick={() => addImageToSketch(imgSrc)}
                   src={imgSrc}
                   w={8}
                   h={8}
@@ -106,7 +108,7 @@ const DraggableWeaponSelector: React.FC<DraggableWeaponSelector> = ({
               return (
                 <Image
                   key={boss}
-                  onClick={() => addWeaponImage(imgSrc)}
+                  onClick={() => addImageToSketch(imgSrc)}
                   src={imgSrc}
                   w={8}
                   h={8}
@@ -122,4 +124,4 @@ const DraggableWeaponSelector: React.FC<DraggableWeaponSelector> = ({
   );
 };
 
-export default DraggableWeaponSelector;
+export default DraggableImageAdder;

@@ -1,5 +1,5 @@
-import { ButtonGroup, Flex, Box } from "@chakra-ui/core";
-import { RankedMode, Stage, Weapon } from "@sendou-ink/shared";
+import { ButtonGroup, Flex } from "@chakra-ui/core";
+import { RankedMode, Stage } from "@sendou-ink/shared";
 import { stages } from "@sendou-ink/shared/constants/stages";
 import MyButton from "components/common/MyButton";
 import PageHeader from "components/common/PageHeader";
@@ -13,7 +13,7 @@ import {
   FaFileImage,
   FaFileUpload,
 } from "react-icons/fa";
-import DraggableWeaponSelector from "components/plans/DraggableWeaponSelector";
+import DraggableImageAdder from "components/plans/DraggableImageAdder";
 
 const MapSketch = dynamic(() => import("components/plans/MapSketch"), {
   ssr: false,
@@ -178,11 +178,8 @@ const MapPlannerPage: NextPage = () => {
   const [bg, setBg] = useState<PlannerMapBg>(REEF);
   const [controlledValue, setControlledValue] = useState(defaultValue);
 
-  const addImageToSketch = (weapon: Weapon) => {
-    sketch.current.addImg(
-      "https://peda.net/loimaa/peruskoulut/alastaron-yl%C3%A4aste/tapahtumia/2016-2017/mlv/mlv-k3/01-hevonen-jpg:file/download/b88e39ae2fc0ed0d9a44b543be23d4e5a67c0b91/01%20Hevonen.JPG"
-    );
-    //setTool(Tools.Select);
+  const addImageToSketch = (imgSrc: string) => {
+    sketch.current.addImg(imgSrc);
   };
 
   const addTextToSketch = () => {
@@ -193,7 +190,6 @@ const MapPlannerPage: NextPage = () => {
       strokeWidth: 3,
       paintFirst: "stroke",
     });
-    //setTool(Tools.Select);
   };
 
   const undo = () => {
@@ -318,8 +314,8 @@ const MapPlannerPage: NextPage = () => {
         color={color}
         setColor={(newColor) => setColor(newColor)}
       />
-      <DraggableWeaponSelector
-        addWeaponImage={(weapon) => addImageToSketch(weapon)}
+      <DraggableImageAdder
+        addImageToSketch={(imgSrc) => addImageToSketch(imgSrc)}
       />
       <MapSketch
         sketch={sketch}
