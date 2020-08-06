@@ -1,9 +1,9 @@
 import React from "react";
 import { Image, ImageProps } from "@chakra-ui/core";
-import { Mode } from "@sendou-ink/shared/types";
+import { RankedMode } from "@sendou-ink/shared/types";
 
 interface ModeImageProps {
-  mode: Mode;
+  mode: RankedMode;
 }
 
 const ModeImage: React.FC<ModeImageProps & ImageProps> = ({
