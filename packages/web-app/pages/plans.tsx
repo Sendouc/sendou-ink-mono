@@ -35,7 +35,7 @@ export interface PlannerMapBg {
   tide?: "low" | "mid" | "high";
 }
 
-const reversedCodes = [
+const stageToCode = new Map<Stage, string>([
   ["Ancho-V Games", "AG"],
   ["Arowana Mall", "AM"],
   ["Blackbelly Skatepark", "BS"],
@@ -59,43 +59,13 @@ const reversedCodes = [
   ["The Reef", "TR"],
   ["Wahoo World", "WH"],
   ["Walleye Warehouse", "WW"],
-] as const;
-
-const stageToCode = new Map<Stage, string>(reversedCodes);
-
-const codes = [
-  ["AG", "Ancho-V Games"],
-  ["AM", "Arowana Mall"],
-  ["BS", "Blackbelly Skatepark"],
-  ["CT", "Camp Triggerfish"],
-  ["GA", "Goby Arena"],
-  ["HP", "Humpback Pump Track"],
-  ["IA", "Inkblot Art Academy"],
-  ["KD", "Kelp Dome"],
-  ["MF", "Musselforge Fitness"],
-  ["MK", "MakoMart"],
-  ["MM", "Manta Maria"],
-  ["MT", "Moray Towers"],
-  ["NA", "New Albacore Hotel"],
-  ["PM", "Port Mackerel"],
-  ["PP", "Piranha Pit"],
-  ["SC", "Snapper Canal"],
-  ["SI", "Shellendorf Institute"],
-  ["SM", "Starfish Mainstage"],
-  ["SP", "Skipper Pavilion"],
-  ["SS", "Sturgeon Shipyard"],
-  ["TR", "The Reef"],
-  ["WH", "Wahoo World"],
-  ["WW", "Walleye Warehouse"],
-] as const;
-
-const codeToStage = new Map(codes);
+]);
 
 const plannerMapBgToImage = (bg: PlannerMapBg) => {
   if (!bg.tide)
-    return `images/plannerMaps/${bg.view} ${stageToCode.get(bg.stage)} ${
-      bg.mode
-    }.png`;
+    return `images/plannerMaps/${bg.view} ${stageToCode.get(
+      bg.stage as Stage
+    )} ${bg.mode}.png`;
 
   // Needs to be done like this for some strange reason
   if (bg.stage === "Ruins of Ark Polaris‎‎") {
@@ -243,9 +213,7 @@ const MapPlannerPage: NextPage = () => {
     document.body.appendChild(a);
     a.style.display = "none";
     a.href = dataUrl;
-    a.download = `${bg.view}-${stageToCode.get(bg.stage)}-${
-      bg.mode
-    } plans ${getDateFormatted()}.${extension}`;
+    a.download = `${bg.stage} plans ${getDateFormatted()}.${extension}`;
     a.click();
     window.URL.revokeObjectURL(dataUrl);
   };
@@ -255,31 +223,6 @@ const MapPlannerPage: NextPage = () => {
       return;
     }
     fileInput.current.click();
-  };
-
-  const parseAndSetForms = (name: string) => {
-    const firstPart = name.split(" ")[0];
-    if (!(firstPart.length === 7 || !firstPart.includes("-"))) return;
-
-    const split = firstPart.split("-");
-    if (split.length !== 3) return;
-
-    const [view, stage, mode] = split;
-
-    if (!["M", "R"].includes(view)) return;
-    if (
-      !Array.from(reversedCodes.values())
-        .map((tuple) => tuple[1])
-        .includes(stage as any)
-    )
-      return;
-    if (!["SZ", "TC", "RM", "CB"].includes(mode)) return;
-
-    setBg({
-      view: view as any,
-      stage: codeToStage.get(stage as any)!,
-      mode: mode as any,
-    });
   };
 
   const files = fileInput.current?.files;
@@ -295,8 +238,6 @@ const MapPlannerPage: NextPage = () => {
     };
 
     reader.readAsText(fileObj);
-
-    parseAndSetForms(fileObj.name);
   }, [files]);
 
   useEffect(() => {
@@ -372,7 +313,7 @@ const MapPlannerPage: NextPage = () => {
         handleChange={(e) => {
           const newStage = e.target.value;
           const newIsSalmonRunStage = !stages.includes(newStage as Stage);
-          const oldIsSalmonRunStage = !stages.includes(bg.stage);
+          const oldIsSalmonRunStage = !stages.includes(bg.stage as Stage);
 
           if (newIsSalmonRunStage === oldIsSalmonRunStage) {
             setBg({ ...bg, stage: e.target.value as Stage });
