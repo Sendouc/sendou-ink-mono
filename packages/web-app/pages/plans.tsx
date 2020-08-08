@@ -24,16 +24,16 @@ export type Tool = "pencil" | "line" | "rectangle" | "circle" | "select";
 
 export interface PlannerMapBg {
   view?: "M" | "R";
-  stage: Stage;
+  stage:
+    | Stage
+    | "Spawning Grounds"
+    | "Marooner's Bay"
+    | "Lost Outpost"
+    | "Salmonid Smokeyard"
+    | "Ruins of Ark Polaris‎‎";
   mode?: "SZ" | "TC" | "RM" | "CB";
   tide?: "low" | "mid" | "high";
 }
-
-const REEF = {
-  view: "M",
-  stage: "The Reef",
-  mode: "SZ",
-} as const;
 
 const reversedCodes = [
   ["Ancho-V Games", "AG"],
@@ -97,6 +97,11 @@ const plannerMapBgToImage = (bg: PlannerMapBg) => {
       bg.mode
     }.png`;
 
+  // Needs to be done like this for some strange reason
+  if (bg.stage === "Ruins of Ark Polaris‎‎") {
+    return `images/plannerMaps/Ruins%20of%20Ark%20Polaris-${bg.tide}.png`;
+  }
+
   return `images/plannerMaps/${bg.stage}-${bg.tide}.png`;
 };
 
@@ -159,7 +164,7 @@ const defaultValue = {
     crossOrigin: "",
     cropX: 0,
     cropY: 0,
-    src: "https://sendou.ink/plannerMaps/M%20TR%20SZ.png",
+    src: "/images/plannerMaps/M%20TR%20SZ.png",
     filters: [],
   },
 };
@@ -171,7 +176,11 @@ const MapPlannerPage: NextPage = () => {
   const [color, setColor] = useState("#f44336");
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
-  const [bg, setBg] = useState<PlannerMapBg>(REEF);
+  const [bg, setBg] = useState<PlannerMapBg>({
+    view: "M",
+    stage: "The Reef",
+    mode: "SZ",
+  });
   const [controlledValue, setControlledValue] = useState(defaultValue);
 
   const addImageToSketch = (imgSrc: string) => {

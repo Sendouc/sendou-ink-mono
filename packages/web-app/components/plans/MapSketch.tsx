@@ -1,5 +1,6 @@
 import { SketchField } from "@sendou/react-sketch";
 import { Tool } from "pages/plans";
+import { Box } from "@chakra-ui/core";
 
 interface MapSketchProps {
   sketch: any;
@@ -17,19 +18,21 @@ const MapSketch: React.FC<MapSketchProps> = ({
   tool,
 }) => {
   return (
-    <SketchField
-      name="sketch"
-      className="canvas-area"
-      ref={sketch}
-      lineColor={color}
-      lineWidth={5}
-      width={1127}
-      height={634}
-      value={controlledValue}
-      onChange={onSketchChange}
-      tool={tool}
-      style={{ position: "relative", left: "-27px" }}
-    />
+    <Box ml="3rem">
+      <SketchField
+        name="sketch"
+        className="canvas-area"
+        ref={sketch}
+        lineColor={color}
+        lineWidth={5}
+        width={1127}
+        height={634}
+        value={controlledValue}
+        onChange={onSketchChange}
+        tool={tool}
+        style={{ position: "relative", left: "-27px" }}
+      />
+    </Box>
   );
 };
 
