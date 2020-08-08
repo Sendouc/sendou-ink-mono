@@ -10,7 +10,9 @@ Future home of sendou.ink [sendou.ink](https://sendou.ink/), [Lohi](https://gith
 
 ## Contributing
 
-Since this is work in progress right now I'm not accepting contributions yet. Eventually my goal is to make it easy.
+Everything is still very much work in progress but the basic idea is that [any issue that isn't assigned to me](https://github.com/Sendouc/sendou-ink-mono/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee+-label%3Ablocked) I'm happy to accept help on.
+
+If you want to see someone or yourself work on something that isn't reported as issue yet then please make one first.
 
 ## License
 
