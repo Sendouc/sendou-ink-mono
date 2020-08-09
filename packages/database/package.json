@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@types/mongoose": "^5.7.34",
+    "dotenv": "^8.2.0",
     "mongodb": "^3.6.0",
     "mongoose": "^5.9.27",
     "ts-node": "^8.10.2"

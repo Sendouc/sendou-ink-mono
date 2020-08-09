@@ -1,36 +1,57 @@
-/*import { MongoClient } from "mongodb";
-import * as mongoose from "mongoose";
-import { Top500PlacementModel } from "./models/top500Placement";
+const MongoClient = require("mongodb");
+require("dotenv").config({ path: "../../.env" });
+const mongoose = require("mongoose");
+const { Top500PlacementModel } = require("./models/top500Placement");
 
-mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-    const client = new MongoClient("uri here");
+const uri = process.env.MONGODB_URI;
 
-});*/
+if (!uri) throw Error("No MongoDB URI set");
 
-import { MongoClient } from "mongodb";
+mongoose.connect(uri, { useNewUrlParser: true, dbName: "new" });
 
-// Connection URI
-const uri = "mongodb+srv://sample-hostname:27017/?poolSize=20&w=majority";
-
-// Create a new MongoClient
-const client = new MongoClient(uri);
+let db: any;
 
 async function run() {
-  try {
-    // Connect the client to the server
-    await client.connect();
+  MongoClient.connect(uri, { useUnifiedTopology: true }, async function (
+    err: any,
+    client: any
+  ) {
+    if (err) throw err;
 
-    // Establish and verify connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Connected successfully to server");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+    db = client.db("production");
+
+    //await placements();
+    await aggPlacements();
+    process.exit(-1);
+  });
 }
+
+async function placements() {
+  const placements = await db.collection("placements").find({}).toArray();
+
+  // @ts-ignore
+  const newPlacements = placements.map(({ _id, ...p }) => {
+    return {
+      ...p,
+      xPower: p.x_power,
+      uniqueId: p.unique_id,
+      mode: ["", "SZ", "TC", "RM", "CB"][p.mode],
+    };
+  });
+
+  await Top500PlacementModel.insertMany(newPlacements);
+  console.log("done with placements");
+}
+
+async function aggPlacements() {
+  const placements = await Top500PlacementModel.findTopPlayers(
+    "Custom E-liter 4K"
+  );
+
+  console.log("placements", placements);
+  console.log("type", typeof placements);
+}
+
 run().catch(console.dir);
 
 export {};
