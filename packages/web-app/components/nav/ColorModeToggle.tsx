@@ -1,4 +1,3 @@
-import React from "react";
 import { IconButton, useColorMode } from "@chakra-ui/core";
 import { FiSun, FiMoon } from "react-icons/fi";
 

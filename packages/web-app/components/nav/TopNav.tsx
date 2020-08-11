@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Flex, Image } from "@chakra-ui/core";
 import ColorModeToggle from "./ColorModeToggle";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { SelectProps, Select } from "@chakra-ui/core";
 import useBgColor from "utils/useBgColor";
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Draggable from "react-draggable";
 import { useHotkeys } from "react-hotkeys-hook";
 import {

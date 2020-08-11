@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Image } from "@chakra-ui/core";
 import Link from "next/link";
 import useBgColor from "utils/useBgColor";

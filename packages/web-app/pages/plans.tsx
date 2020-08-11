@@ -6,7 +6,7 @@ import PageHeader from "components/common/PageHeader";
 import StageSelector from "components/plans/StageSelector";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaBomb,
   FaFileDownload,

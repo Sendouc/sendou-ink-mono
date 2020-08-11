@@ -1,4 +1,3 @@
-import React from "react";
 import { Image, ImageProps } from "@chakra-ui/core";
 import { RankedMode } from "@sendou-ink/shared/types";
 

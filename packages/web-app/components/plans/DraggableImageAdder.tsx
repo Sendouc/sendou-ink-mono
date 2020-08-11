@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Draggable from "react-draggable";
 import WeaponImage from "components/common/WeaponImage";
 import { Box, Flex, Image } from "@chakra-ui/core";

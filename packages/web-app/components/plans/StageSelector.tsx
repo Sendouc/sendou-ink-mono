@@ -1,4 +1,3 @@
-import React from "react";
 import { stages } from "@sendou-ink/shared/constants/stages";
 import { PlannerMapBg } from "pages/plans";
 import ModeImage from "components/common/ModeImage";

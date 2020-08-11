@@ -1,4 +1,3 @@
-import React from "react";
 import TopNav from "./TopNav";
 import IconNavBar from "./IconNavBar";
 import { Box } from "@chakra-ui/core";
