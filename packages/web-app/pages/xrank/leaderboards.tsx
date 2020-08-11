@@ -7,7 +7,9 @@ export const getStaticProps: GetStaticProps<{
 }> = async () => {
   await dbConnect();
 
-  const topPlayers = await Top500PlacementModel.findTopPlayers("Squeezer");
+  const topPlayers = await Top500PlacementModel.findTopPlayers(
+    "Custom E-liter 4K"
+  );
 
   return { props: { topPlayers } };
 };
