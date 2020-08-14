@@ -1,5 +1,7 @@
 import { Box, Flex, Image } from "@chakra-ui/core";
 import ColorModeToggle from "./ColorModeToggle";
+import { signIn, signOut, useSession } from "next-auth/client";
+import MyButton from "components/common/MyButton";
 
 const TopNav = () => {
   return (
@@ -8,7 +10,7 @@ const TopNav = () => {
       <Box color="gray.600" fontWeight="bold" letterSpacing={1}>
         sendou.ink
       </Box>
-      <Box />
+      <MyButton onClick={signIn}>Login</MyButton>
     </Flex>
   );
 };

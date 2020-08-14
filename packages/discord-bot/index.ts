@@ -5,7 +5,6 @@ const { Top500PlacementModel } = require("@sendou-ink/database");
 require("dotenv").config({ path: "../../.env" });
 
 mongoose.connect(process.env.MONGODB_URI, {
-  dbName: "new",
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -23,4 +22,4 @@ client.once("ready", async () => {
   console.log("placements", placements);
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);

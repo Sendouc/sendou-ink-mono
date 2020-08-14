@@ -3,3 +3,4 @@
 /// <reference types="next-images" />
 
 declare module "@sendou/react-sketch";
+declare module "next-auth/client";
