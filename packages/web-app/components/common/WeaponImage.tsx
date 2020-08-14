@@ -10,7 +10,10 @@ const WeaponImage: React.FC<ImageProps & WeaponImageProps> = ({
   ...props
 }) => {
   return (
-    <Image src={`/images/weapons/${name.replace(".", "")}.png`} {...props} />
+    <Image
+        src={`/images/weapons/${name.replace(".", "")}.webp`}
+        fallbackSrc={`/images/weapons/${name.replace(".", "")}.png`}
+        {...props} />
   );
 };
 
