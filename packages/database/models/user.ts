@@ -153,7 +153,6 @@ export interface IUser_populated extends IUserBase {
   };
 }
 
-export const UserModel = mongoose.model<IUser, mongoose.Model<IUser>>(
-  "User",
-  UserSchema
-);
+export const UserModel =
+  mongoose.models.User ??
+  mongoose.model<IUser, mongoose.Model<IUser>>("User", UserSchema);

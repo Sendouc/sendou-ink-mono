@@ -56,7 +56,9 @@ interface ITop500PlacementModel extends mongoose.Model<ITop500Placement> {
   findTopPlayers(weapon: Weapon): Promise<XRankTopPlayer[]>;
 }
 
-export const Top500PlacementModel = mongoose.model<
-  ITop500Placement,
-  ITop500PlacementModel
->("Top500Placement", Top500PlacementSchema);
+export const Top500PlacementModel =
+  mongoose.models.Top500Placement ??
+  mongoose.model<ITop500Placement, ITop500PlacementModel>(
+    "Top500Placement",
+    Top500PlacementSchema
+  );

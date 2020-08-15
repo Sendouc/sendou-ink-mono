@@ -3,6 +3,7 @@ import theme from "@chakra-ui/theme";
 import { mode, Styles } from "@chakra-ui/theme-tools";
 import Layout from "components/nav/Layout";
 import { AppProps } from "next/app";
+import { Provider as AuthProvider } from "next-auth/client";
 
 const styles: Styles = {
   ...theme.styles,
@@ -25,12 +26,14 @@ const customTheme: any = {
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <ChakraProvider theme={customTheme}>
-      <CSSReset />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
+    <AuthProvider session={pageProps.session}>
+      <ChakraProvider theme={customTheme}>
+        <CSSReset />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </AuthProvider>
   );
 };
 
