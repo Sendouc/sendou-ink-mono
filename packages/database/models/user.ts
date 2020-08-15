@@ -20,11 +20,14 @@ const UserSchema = new mongoose.Schema({
       type: String,
       min: 4,
       max: 25,
+      trim: true,
     },
     twitterName: {
       type: String,
       min: 1,
       max: 15,
+      lowercase: true,
+      trim: true,
     },
     youtubeChannelId: {
       type: String,
@@ -68,25 +71,35 @@ const UserSchema = new mongoose.Schema({
     },
     bio: {
       type: String,
+      trim: true,
       max: 10000,
     },
     customUrlEnding: {
       type: String,
       min: 2,
       max: 32,
+      lowercase: true,
+      trim: true,
+      unique: true,
+      sparse: true,
       validate: {
         validator: (url: string) => {
-          if (/^-{0,1}\d+$/.test(url) || /^[a-z0-9]+$/i.test(url)) return false;
+          // custom url endings with only numbers not allowed because they can be mixed with discord id's
+          if (url.match(/^\d+$/)) {
+            return false;
+          }
 
-          return true;
+          // custom url ending can only contain letters, numbers and "_"
+          return /^[a-z0-9_]+$/.test(url);
         },
-        message: "Invalid custom URL",
+        message: (props: any) =>
+          `${props.value} is not a valid custom URL ending`,
       },
     },
   },
   plus: {
-    membership: String,
-    vouch: String,
+    membershipStatus: String,
+    vouchStatus: String,
     voucher: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     region: String,
     canVouch: String,
@@ -116,8 +129,8 @@ interface IUserSchema extends mongoose.Document {
     customUrlEnding?: string;
   };
   plus?: {
-    membership?: PlusTier;
-    vouch?: PlusTier;
+    membershipStatus?: PlusTier;
+    vouchStatus?: PlusTier;
     region: PlusRegion;
     canVouch: PlusTier;
     canVouchAgainAfter: string;
