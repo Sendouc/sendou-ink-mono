@@ -2,23 +2,27 @@ import { Flex, Image } from "@chakra-ui/core";
 import Link from "next/link";
 import useBgColor from "utils/useBgColor";
 
-const icons = [
-  { name: "builds" },
-  { name: "analyzer" },
-  { name: "calendar" },
-  { name: "freeagents" },
-  { name: "teams" },
-  { name: "plans" },
-  { name: "tournaments" },
-  { name: "xsearch" },
+export const navIcons = [
+  { name: "builds", isDisabled: true, displayName: "Builds" },
+  { name: "analyzer", isDisabled: true, displayName: "Build Analyzer" },
+  { name: "calendar", isDisabled: true, displayName: "Calendar" },
+  { name: "freeagents", isDisabled: true, displayName: "Free Agents" },
+  { name: "teams", isDisabled: true, displayName: "Teams" },
+  { name: "plans", isDisabled: false, displayName: "Map Planner" },
+  { name: "tournaments", isDisabled: true, displayName: "Tournaments" },
+  { name: "xsearch", isDisabled: true, displayName: "Top 500" },
 ] as const;
 
 const IconNavBar = () => {
   const bg = useBgColor();
   return (
-    <Flex bg={bg} justifyContent="center" py={2}>
-      {icons.map(({ name }) => {
-        const isDisabled = name !== "plans";
+    <Flex
+      bg={bg}
+      justifyContent="center"
+      py={2}
+      display={["none", null, "flex"]}
+    >
+      {navIcons.map(({ name, isDisabled }) => {
         return (
           <Link key={name} href={isDisabled ? "/" : "/" + name}>
             <Image
