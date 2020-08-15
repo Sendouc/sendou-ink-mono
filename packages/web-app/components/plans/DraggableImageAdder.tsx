@@ -103,6 +103,7 @@ const DraggableImageAdder: React.FC<DraggableImageAdderProps> = ({
               "Steel Eal",
               "Steelhead",
               "Stinger",
+              "Golden Egg",
             ].map((boss) => {
               const imgSrc = `/images/salmonRunIcons/${boss}.png`;
               return (
