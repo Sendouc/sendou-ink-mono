@@ -57,7 +57,7 @@ interface ITop500PlacementModel extends mongoose.Model<ITop500Placement> {
 }
 
 export const Top500PlacementModel =
-  mongoose.models.Top500Placement ??
+  <ITop500PlacementModel>mongoose.models.Top500Placement ??
   mongoose.model<ITop500Placement, ITop500PlacementModel>(
     "Top500Placement",
     Top500PlacementSchema
