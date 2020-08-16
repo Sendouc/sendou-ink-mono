@@ -1,3 +1,5 @@
+import { BuildModel } from "./models/build";
+
 const MongoClient = require("mongodb");
 require("dotenv").config({ path: "../../.env" });
 const mongoose = require("mongoose");
@@ -23,7 +25,8 @@ async function run() {
     db = client.db("production");
 
     //await placements();
-    await users();
+    //await users();
+    await builds();
 
     process.exit(-1);
   });
@@ -87,6 +90,39 @@ async function users() {
 
   await UserModel.insertMany(newUsers);
   console.log("inserted users:", newUsers.length);
+}
+
+async function builds() {
+  throw Error("updatedAt / createdAt");
+  const users = await UserModel.find({});
+  const builds = await db.collection("builds").find({}).toArray();
+
+  // @ts-ignore
+  const newBuilds = builds.map((build) => {
+    const author = users.find(
+      (user: any) => user.discord.id === build.discord_id
+    )?._id;
+
+    if (!author) throw Error(`No author found for ${build.discord_id}`);
+
+    return {
+      author,
+      weapon: build.weapon,
+      title: build.title || undefined,
+      description: build.description || undefined,
+      headAbilities: build.headgear,
+      headGear: build.headgearItem || undefined,
+      clothingAbilities: build.clothing,
+      clothingGear: build.clothingItem || undefined,
+      shoesAbilities: build.shoes,
+      shoesGear: build.shoesItem || undefined,
+      top500: build.top ?? false,
+      jpn: build.jpn ?? false,
+    };
+  });
+
+  await BuildModel.insertMany(newBuilds);
+  console.log("inserted builds:", newBuilds.length);
 }
 
 run().catch(console.dir);
