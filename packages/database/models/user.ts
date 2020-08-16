@@ -18,20 +18,20 @@ const UserSchema = new mongoose.Schema({
   profile: {
     twitchName: {
       type: String,
-      min: 4,
-      max: 25,
+      minlength: 4,
+      maxlength: 25,
       trim: true,
     },
     twitterName: {
       type: String,
-      min: 1,
-      max: 15,
+      minlength: 1,
+      maxlength: 15,
       lowercase: true,
       trim: true,
     },
     youtubeChannelId: {
       type: String,
-      max: 25,
+      maxlength: 25,
     },
     countryCode: {
       type: String,
@@ -72,12 +72,12 @@ const UserSchema = new mongoose.Schema({
     bio: {
       type: String,
       trim: true,
-      max: 10000,
+      maxlength: 10000,
     },
     customUrlEnding: {
       type: String,
-      min: 2,
-      max: 32,
+      minlength: 2,
+      maxlength: 32,
       lowercase: true,
       trim: true,
       unique: true,
