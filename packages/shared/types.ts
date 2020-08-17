@@ -11,3 +11,6 @@ export type Weapon = ElementType<typeof weapons>;
 export type Stage = ElementType<typeof stages>;
 
 export type RankedMode = "SZ" | "TC" | "RM" | "CB";
+
+export type PlusTier = "ONE" | "TWO";
+export type PlusRegion = "EU" | "NA";

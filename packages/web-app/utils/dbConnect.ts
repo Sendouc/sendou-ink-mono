@@ -7,8 +7,11 @@ async function dbConnect() {
     return;
   }
 
-  const db = await mongoose.connect(process.env.MONGODB_URI!, {
-    dbName: "new",
+  if (!process.env.MONGODB_URI) {
+    throw new Error("No MONGODB_URI env variable set.");
+  }
+
+  const db = await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
