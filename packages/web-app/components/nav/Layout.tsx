@@ -43,6 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         isRound
         m={4}
         size="lg"
+        display={["flex", null, "none"]}
       >
         Open
       </IconButton>
