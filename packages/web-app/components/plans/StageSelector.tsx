@@ -23,7 +23,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
 }) => {
   return (
     <Box maxW="20rem" m="3rem auto">
-      <MySelect placeholder="Change background" onChange={handleChange}>
+      <MySelect value={currentBackground.stage} placeholder="Change background" onChange={handleChange}>
         {stages.map((stage) => (
           <option key={stage} value={stage}>
             {stage}
@@ -33,7 +33,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
         <option value="Marooner's Bay">Marooner's Bay</option>
         <option value="Lost Outpost">Lost Outpost</option>
         <option value="Salmonid Smokeyard">Salmonid Smokeyard</option>
-        <option value="Ruins of Ark Polaris‎‎">Ruins of Ark Polaris‎‎</option>
+        <option value="Ruins of Ark Polaris">Ruins of Ark Polaris‎‎</option>
       </MySelect>
       {currentBackground.tide ? (
         <>
