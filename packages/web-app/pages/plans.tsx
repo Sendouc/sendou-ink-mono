@@ -30,7 +30,7 @@ export interface PlannerMapBg {
     | "Marooner's Bay"
     | "Lost Outpost"
     | "Salmonid Smokeyard"
-    | "Ruins of Ark Polaris‎‎";
+    | "Ruins of Ark Polaris";
   mode?: "SZ" | "TC" | "RM" | "CB";
   tide?: "low" | "mid" | "high";
 }
@@ -66,11 +66,6 @@ const plannerMapBgToImage = (bg: PlannerMapBg) => {
     return `images/plannerMaps/${bg.view} ${stageToCode.get(
       bg.stage as Stage
     )} ${bg.mode}.png`;
-
-  // Needs to be done like this for some strange reason
-  if (bg.stage === "Ruins of Ark Polaris‎‎") {
-    return `images/plannerMaps/Ruins%20of%20Ark%20Polaris-${bg.tide}.png`;
-  }
 
   return `images/plannerMaps/${bg.stage}-${bg.tide}.png`;
 };
@@ -235,8 +230,40 @@ const MapPlannerPage: NextPage = () => {
     reader.onload = function (event) {
       const jsonObj = JSON.parse(event.target!.result as any);
       setControlledValue(jsonObj);
-    };
 
+      const imgSrc = jsonObj.backgroundImage.src;
+      const searchFolder = "plannerMaps";
+      const imgName = imgSrc.slice(imgSrc.lastIndexOf(searchFolder) + searchFolder.length + 1, -4).replace(/%20/g, ' ');
+
+      const salmonRunMaps = ["Spawning Grounds", "Marooner's Bay", "Lost Outpost", "Salmonid Smokeyard", "Ruins of Ark Polaris‎‎"];
+      let isSalmonRunMap = false;
+      for (const map of salmonRunMaps) {
+        if (imgName.startsWith(map)) {
+          isSalmonRunMap = true;
+          const imageNameParts = imgName.split('-');
+          if (imageNameParts.length > 1) {
+            const tide = imageNameParts[1];
+            setBg({ tide: tide, stage: map as Stage})
+          }
+        }
+      }
+
+      if (!isSalmonRunMap) {
+        const imageNameParts = imgName.split(' ');
+        if (imageNameParts.length > 2) {
+          const view = imageNameParts[0];
+          const mapCode = imageNameParts[1];
+          const mode = imageNameParts[2];
+          let mapName = '';
+          stageToCode.forEach((value, key) => {
+            if (value === mapCode) {
+              mapName = key;
+            }
+          });
+          setBg({view, stage: mapName as Stage, mode})
+        }
+      }
+    };
     reader.readAsText(fileObj);
   }, [files]);
 
@@ -312,6 +339,9 @@ const MapPlannerPage: NextPage = () => {
       <StageSelector
         handleChange={(e) => {
           const newStage = e.target.value;
+          if (newStage === '') {
+            return;
+          }
           const newIsSalmonRunStage = !stages.includes(newStage as Stage);
           const oldIsSalmonRunStage = !stages.includes(bg.stage as Stage);
 
