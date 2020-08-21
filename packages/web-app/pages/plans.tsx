@@ -264,7 +264,6 @@ const MapPlannerPage: NextPage = () => {
         }
       }
     };
-
     reader.readAsText(fileObj);
   }, [files]);
 
