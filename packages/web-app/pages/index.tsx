@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       Imported modules from another aaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa
-      workspaceaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa a:
+      workspaceaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa a:
       {weapons[0]}
     </div>
   );

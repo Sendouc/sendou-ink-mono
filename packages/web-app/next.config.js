@@ -4,6 +4,9 @@ require("dotenv").config({ path: "../../.env" });
 
 module.exports = withImages(
   withTM({
+    devIndicators: {
+      autoPrerender: false,
+    },
     env: {
       MONGODB_URI: process.env.MONGODB_URI,
       DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
