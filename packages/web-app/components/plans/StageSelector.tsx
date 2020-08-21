@@ -23,7 +23,7 @@ const StageSelector: React.FC<StageSelectorProps> = ({
 }) => {
   return (
     <Box maxW="20rem" m="3rem auto">
-      <MySelect value={currentBackground.stage} placeholder="Change background" onChange={handleChange}>
+      <MySelect value={currentBackground.stage} onChange={handleChange}>
         {stages.map((stage) => (
           <option key={stage} value={stage}>
             {stage}
