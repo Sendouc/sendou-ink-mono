@@ -10,7 +10,6 @@
     "@chakra-ui/core": "1.0.0-rc.0",
     "@chakra-ui/theme": "1.0.0-rc.0",
     "@chakra-ui/theme-tools": "1.0.0-rc.0",
-    "@sendou-ink/database": "1.0.0",
     "@sendou-ink/shared": "1.0.0",
     "@sendou/react-sketch": "^0.5.2",
     "@types/mongoose": "^5.7.36",

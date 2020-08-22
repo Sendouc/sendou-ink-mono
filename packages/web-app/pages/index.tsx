@@ -3,9 +3,8 @@ import { weapons } from "@sendou-ink/shared";
 export default function Home() {
   return (
     <div>
-      Imported modules from another aaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa
-      workspaceaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa a:
-      {weapons[0]}
+      Work in progress :) Check out the old site for now:{" "}
+      <a href="https://sendou.ink">sendou.ink</a>
     </div>
   );
 }
