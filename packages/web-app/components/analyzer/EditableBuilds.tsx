@@ -11,6 +11,7 @@ import {
   headOnlyAbilities,
   clothingOnlyAbilities,
   shoesOnlyAbilities,
+  AbilityOrUnknown,
 } from "@sendou-ink/shared";
 import MyButton from "components/common/MyButton";
 import { FaPlus, FaMinus } from "react-icons/fa";
@@ -25,13 +26,13 @@ interface EditableBuildsProps {
   setShowOther: React.Dispatch<React.SetStateAction<boolean>>;
   otherFocused: boolean;
   changeFocus: () => void;
-  bonusAp: Partial<Record<Ability, boolean>>;
+  bonusAp: Partial<Record<AbilityOrUnknown<Ability>, boolean>>;
   setBonusAp: React.Dispatch<
-    React.SetStateAction<Partial<Record<Ability, boolean>>>
+    React.SetStateAction<Partial<Record<AbilityOrUnknown<Ability>, boolean>>>
   >;
-  otherBonusAp: Partial<Record<Ability, boolean>>;
+  otherBonusAp: Partial<Record<AbilityOrUnknown<Ability>, boolean>>;
   setOtherBonusAp: React.Dispatch<
-    React.SetStateAction<Partial<Record<Ability, boolean>>>
+    React.SetStateAction<Partial<Record<AbilityOrUnknown<Ability>, boolean>>>
   >;
   lde: number;
   otherLde: number;
@@ -185,7 +186,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
             </MyButton>
           )}
           <ViewSlots
-            build={build}
+            abilities={build}
             onAbilityClick={!otherFocused ? handleClickBuildAbility : undefined}
             m="1em"
             cursor={!otherFocused ? undefined : "not-allowed"}
@@ -219,7 +220,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
               {otherFocused ? "Editing" : "Edit"}
             </MyButton>
             <ViewSlots
-              build={otherBuild}
+              abilities={otherBuild}
               onAbilityClick={
                 otherFocused ? handleClickBuildAbility : undefined
               }
