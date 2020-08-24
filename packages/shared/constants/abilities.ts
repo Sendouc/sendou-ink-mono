@@ -1,20 +1,25 @@
-export const headOnlyAbilities = ["CB", "LDE", "OG", "T"] as const;
-export const clothingOnlyAbilities = ["H", "NS", "TI", "RP", "AD"] as const;
-export const shoesOnlyAbilities = ["DR", "SJ", "OS"] as const;
+export const headOnlyAbilities = ["OG", "LDE", "T", "CB"] as const;
+export const clothingOnlyAbilities = ["NS", "H", "TI", "RP", "AD"] as const;
+export const shoesOnlyAbilities = ["SJ", "OS", "DR"] as const;
+export const mainOnlyAbilities = [
+  ...headOnlyAbilities,
+  ...clothingOnlyAbilities,
+  ...shoesOnlyAbilities,
+];
+
 export const stackableAbilities = [
-  "BDU",
-  "REC",
-  "RES",
   "ISM",
   "ISS",
-  "MPU",
-  "QR",
-  "QSJ",
+  "REC",
   "RSU",
   "SSU",
   "SCU",
-  "SPU",
   "SS",
+  "SPU",
+  "QR",
+  "QSJ",
   "BRU",
-  "AD",
+  "RES",
+  "BDU",
+  "MPU",
 ] as const;

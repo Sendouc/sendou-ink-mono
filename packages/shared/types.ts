@@ -23,10 +23,37 @@ export type HeadOnlyAbility = ElementType<typeof headOnlyAbilities>;
 export type ClothingOnlyAbility = ElementType<typeof clothingOnlyAbilities>;
 export type ShoesOnlyAbility = ElementType<typeof shoesOnlyAbilities>;
 export type StackableAbility = ElementType<typeof stackableAbilities>;
+export type Ability =
+  | HeadOnlyAbility
+  | ClothingOnlyAbility
+  | ShoesOnlyAbility
+  | StackableAbility;
+export type AbilityOrUnknown<T> = T | "UNKNOWN";
 
 export type HeadGear = ElementType<typeof headGears>;
 export type ClothingGear = ElementType<typeof clothingGears>;
 export type ShoesGear = ElementType<typeof shoesGears>;
+
+export interface BuildsAbilities {
+  headgearAbilities: [
+    AbilityOrUnknown<HeadOnlyAbility | StackableAbility>,
+    AbilityOrUnknown<StackableAbility>,
+    AbilityOrUnknown<StackableAbility>,
+    AbilityOrUnknown<StackableAbility>
+  ];
+  clothingAbilities: [
+    AbilityOrUnknown<ClothingOnlyAbility | StackableAbility>,
+    AbilityOrUnknown<StackableAbility>,
+    AbilityOrUnknown<StackableAbility>,
+    AbilityOrUnknown<StackableAbility>
+  ];
+  shoesAbilities: [
+    AbilityOrUnknown<ShoesOnlyAbility | StackableAbility>,
+    AbilityOrUnknown<StackableAbility>,
+    AbilityOrUnknown<StackableAbility>,
+    AbilityOrUnknown<StackableAbility>
+  ];
+}
 
 export type RankedMode = "SZ" | "TC" | "RM" | "CB";
 
