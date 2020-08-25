@@ -11,7 +11,6 @@ import {
   headOnlyAbilities,
   clothingOnlyAbilities,
   shoesOnlyAbilities,
-  AbilityOrUnknown,
 } from "@sendou-ink/shared";
 import MyButton from "components/common/MyButton";
 import { FaPlus, FaMinus } from "react-icons/fa";
@@ -26,13 +25,13 @@ interface EditableBuildsProps {
   setShowOther: React.Dispatch<React.SetStateAction<boolean>>;
   otherFocused: boolean;
   changeFocus: () => void;
-  bonusAp: Partial<Record<AbilityOrUnknown<Ability>, boolean>>;
+  bonusAp: Partial<Record<Ability, boolean>>;
   setBonusAp: React.Dispatch<
-    React.SetStateAction<Partial<Record<AbilityOrUnknown<Ability>, boolean>>>
+    React.SetStateAction<Partial<Record<Ability, boolean>>>
   >;
-  otherBonusAp: Partial<Record<AbilityOrUnknown<Ability>, boolean>>;
+  otherBonusAp: Partial<Record<Ability, boolean>>;
   setOtherBonusAp: React.Dispatch<
-    React.SetStateAction<Partial<Record<AbilityOrUnknown<Ability>, boolean>>>
+    React.SetStateAction<Partial<Record<Ability, boolean>>>
   >;
   lde: number;
   otherLde: number;

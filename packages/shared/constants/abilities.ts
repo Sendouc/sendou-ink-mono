@@ -22,4 +22,5 @@ export const stackableAbilities = [
   "RES",
   "BDU",
   "MPU",
+  "UNKNOWN",
 ] as const;

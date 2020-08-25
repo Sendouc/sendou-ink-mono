@@ -17,6 +17,38 @@ type ElementType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<
   : never;
 
 export type Weapon = ElementType<typeof weapons>;
+export type SubWeapon =
+  | "Splat Bomb"
+  | "Suction Bomb"
+  | "Burst Bomb"
+  | "Curling Bomb"
+  | "Autobomb"
+  | "Ink Mine"
+  | "Sprinkler"
+  | "Toxic Mist"
+  | "Point Sensor"
+  | "Splash Wall"
+  | "Squid Beakon"
+  | "Fizzy Bomb"
+  | "Torpedo";
+
+export type SpecialWeapon =
+  | "Tenta Missiles"
+  | "Sting Ray"
+  | "Inkjet"
+  | "Splashdown"
+  | "Ink Armor"
+  | "Curling-Bomb Launcher"
+  | "Burst-Bomb Launcher"
+  | "Autobomb Launcher"
+  | "Splat-Bomb Launcher"
+  | "Suction-Bomb Launcher"
+  | "Ink Storm"
+  | "Baller"
+  | "Bubble Blower"
+  | "Booyah Bomb"
+  | "Ultra Stamp";
+
 export type Stage = ElementType<typeof stages>;
 
 export type HeadOnlyAbility = ElementType<typeof headOnlyAbilities>;
@@ -28,7 +60,6 @@ export type Ability =
   | ClothingOnlyAbility
   | ShoesOnlyAbility
   | StackableAbility;
-export type AbilityOrUnknown<T> = T | "UNKNOWN";
 
 export type HeadGear = ElementType<typeof headGears>;
 export type ClothingGear = ElementType<typeof clothingGears>;
@@ -36,22 +67,22 @@ export type ShoesGear = ElementType<typeof shoesGears>;
 
 export interface BuildsAbilities {
   headgearAbilities: [
-    AbilityOrUnknown<HeadOnlyAbility | StackableAbility>,
-    AbilityOrUnknown<StackableAbility>,
-    AbilityOrUnknown<StackableAbility>,
-    AbilityOrUnknown<StackableAbility>
+    HeadOnlyAbility | StackableAbility,
+    StackableAbility,
+    StackableAbility,
+    StackableAbility
   ];
   clothingAbilities: [
-    AbilityOrUnknown<ClothingOnlyAbility | StackableAbility>,
-    AbilityOrUnknown<StackableAbility>,
-    AbilityOrUnknown<StackableAbility>,
-    AbilityOrUnknown<StackableAbility>
+    ClothingOnlyAbility | StackableAbility,
+    StackableAbility,
+    StackableAbility,
+    StackableAbility
   ];
   shoesAbilities: [
-    AbilityOrUnknown<ShoesOnlyAbility | StackableAbility>,
-    AbilityOrUnknown<StackableAbility>,
-    AbilityOrUnknown<StackableAbility>,
-    AbilityOrUnknown<StackableAbility>
+    ShoesOnlyAbility | StackableAbility,
+    StackableAbility,
+    StackableAbility,
+    StackableAbility
   ];
 }
 

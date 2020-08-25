@@ -1,4 +1,4 @@
-import { Ability, AbilityOrUnknown } from "@sendou-ink/shared";
+import { Ability } from "@sendou-ink/shared";
 import { Image, ImageProps } from "@chakra-ui/core";
 
 //https://github.com/loadout-ink/splat2-calc
@@ -11,7 +11,7 @@ const sizeMap = {
 } as const;
 
 interface AbilityIconProps {
-  ability: AbilityOrUnknown<Ability>;
+  ability: Ability;
   size: "MAIN" | "SUB" | "TINY" | "SUBTINY";
 }
 
