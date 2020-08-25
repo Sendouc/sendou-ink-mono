@@ -5,21 +5,24 @@ import {
   PopoverContent,
   PopoverTrigger,
   Progress,
+  IconButton,
 } from "@chakra-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { FaChartLine, FaQuestion } from "react-icons/fa";
-import { Explanation } from "../../hooks/useAbilityEffects";
-import MyThemeContext from "../../themeContext";
-import { Ability, Build } from "../../types";
-import { mainOnlyAbilities } from "../../utils/lists";
-import AbilityIcon from "../builds/AbilityIcon";
-import IconButton from "../elements/IconButton";
+import { Explanation } from "utils/useAbilityEffects";
+import {
+  Ability,
+  BuildsAbilities,
+  mainOnlyAbilities,
+} from "@sendou-ink/shared";
+import AbilityIcon from "components/builds/AbilityIcon";
 import StatChart from "./StatChart";
+import useBgColor from "utils/useBgColor";
 
 interface BuildStatsProps {
   explanations: Explanation[];
   otherExplanations?: Explanation[];
-  build: Partial<Build>;
+  build: BuildsAbilities;
   hideExtra?: boolean;
   showNotActualProgress?: boolean;
   startChartsAtZero?: boolean;
@@ -36,9 +39,9 @@ const BuildStats: React.FC<BuildStatsProps> = ({
   const [expandedCharts, setExpandedCharts] = useState<Set<string>>(new Set());
 
   const abilityArrays: Ability[][] = [
-    build.headgear ?? [],
-    build.clothing ?? [],
-    build.shoes ?? [],
+    build.headgearAbilities ?? [],
+    build.clothingAbilities ?? [],
+    build.shoesAbilities ?? [],
   ];
 
   const abilityToPoints: Partial<Record<Ability, number>> = {};
@@ -82,9 +85,7 @@ const BuildStats: React.FC<BuildStatsProps> = ({
     toggleChart,
     progressBarValue = 0,
   }) => {
-    const { darkerBgColor, themeColorWithShade, colorMode } = useContext(
-      MyThemeContext
-    );
+    const bg = useBgColor();
 
     return (
       <>
@@ -93,26 +94,25 @@ const BuildStats: React.FC<BuildStatsProps> = ({
             <Box mr="0.5em" minW="30px">
               <AbilityIcon ability={ability} size="TINY" />
             </Box>
-            <IconButton icon={FaChartLine} onClick={() => toggleChart()} />
+            <IconButton
+              aria-label="Toggle chart"
+              icon={<FaChartLine />}
+              onClick={() => toggleChart()}
+            />
             {title}
             {info && (
               <Popover trigger="hover" placement="top-start">
                 <PopoverTrigger>
                   <Box>
                     <Box
-                      color={themeColorWithShade}
+                      color="blue.500"
                       ml="0.2em"
                       as={FaQuestion}
                       mb="0.2em"
                     />
                   </Box>
                 </PopoverTrigger>
-                <PopoverContent
-                  zIndex={4}
-                  p="0.5em"
-                  bg={darkerBgColor}
-                  border="0"
-                >
+                <PopoverContent zIndex={4} p="0.5em" bg={bg} border="0">
                   {info}
                 </PopoverContent>
               </Popover>
@@ -132,7 +132,7 @@ const BuildStats: React.FC<BuildStatsProps> = ({
           value={progressBarValue}
           hasStripe
           isAnimated
-          bg={colorMode === "dark" ? "#464b64" : `orange.100`}
+          bg="orange.100"
         />
         {otherEffect && (
           <>
@@ -142,15 +142,11 @@ const BuildStats: React.FC<BuildStatsProps> = ({
               value={otherProgressBarValue}
               hasStripe
               isAnimated
-              bg={colorMode === "dark" ? "#464b64" : `blue.100`}
+              bg="blue.100"
             />
             <Flex justifyContent="space-between">
               <Box />
-              <Box
-                fontWeight="bold"
-                color={`blue.${colorMode === "dark" ? "200" : "500"}`}
-                alignSelf="flex-end"
-              >
+              <Box fontWeight="bold" color="blue.500" alignSelf="flex-end">
                 {otherEffect}
               </Box>
             </Flex>

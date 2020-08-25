@@ -29,16 +29,18 @@ const AbilityButtons: React.FC<AbilityButtonsProps> = ({ onClick }) => {
         <Box>Stackable abilities</Box>
       </Box>
       <Flex flexWrap="wrap" justifyContent="center" maxW="350px" mx="auto">
-        {stackableAbilities.map((ability) => (
-          <Box
-            m="0.3em"
-            key={ability}
-            cursor="pointer"
-            onClick={() => onClick(ability)}
-          >
-            <AbilityIcon ability={ability} size="SUB" />
-          </Box>
-        ))}
+        {stackableAbilities.map((ability) =>
+          ability === "UNKNOWN" ? null : (
+            <Box
+              m="0.3em"
+              key={ability}
+              cursor="pointer"
+              onClick={() => onClick(ability)}
+            >
+              <AbilityIcon ability={ability} size="SUB" />
+            </Box>
+          )
+        )}
       </Flex>
     </>
   );

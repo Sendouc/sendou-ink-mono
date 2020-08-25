@@ -1,31 +1,30 @@
+import { useState } from "react";
 import { Box, FormLabel, Switch, Badge, Flex } from "@chakra-ui/core";
-import useAbilityEffects from "../../hooks/useAbilityEffects";
-import { Build, Ability, Weapon } from "../../types";
-import PageHeader from "../common/PageHeader";
-import WeaponSelector from "../common/WeaponSelector";
-import BuildStats from "./BuildStats";
-import EditableBuilds from "./EditableBuilds";
-import MyThemeContext from "../../themeContext";
+import useAbilityEffects from "utils/useAbilityEffects";
+import { BuildsAbilities, Ability, Weapon } from "@sendou-ink/shared";
+import PageHeader from "components/common/PageHeader";
+import WeaponSelector from "components/common/WeaponSelector";
+import BuildStats from "components/analyzer/BuildStats";
+import EditableBuilds from "components/analyzer/EditableBuilds";
 import { FaWrench } from "react-icons/fa";
-import Button from "../elements/Button";
+import MyButton from "components/common/MyButton";
+import t from "utils/mockTranslation";
+import { NextPage } from "next";
 
-const CURRENT_PATCH = "5.2.";
+const CURRENT_PATCH = "5.3.";
 
-const defaultBuild: Partial<Build> = {
-  headgear: ["UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN"],
-  clothing: ["UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN"],
-  shoes: ["UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN"],
+const defaultBuild: BuildsAbilities = {
+  headgearAbilities: ["UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN"],
+  clothingAbilities: ["UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN"],
+  shoesAbilities: ["UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN"],
 };
 
-const BuildAnalyzerPage: React.FC<RouteComponentProps> = () => {
-  const { themeColor, grayWithShade } = useContext(MyThemeContext);
-  const { t } = useTranslation();
-  const location = useLocation();
-  const [build, setBuild] = useState<Partial<Build>>(getBuildFromUrl());
-  const [otherBuild, setOtherBuild] = useState<Partial<Build>>({
+const BuildAnalyzerPage: NextPage = () => {
+  const [build, setBuild] = useState<BuildsAbilities>({ ...defaultBuild });
+  const [otherBuild, setOtherBuild] = useState<BuildsAbilities>({
     ...defaultBuild,
-    weapon: getBuildFromUrl().weapon,
   });
+  const [weapon, setWeapon] = useState<Weapon>("Splattershot Jr.");
   const [showOther, setShowOther] = useState(false);
   const [showNotActualProgress, setShowNotActualProgress] = useState(false);
   const [startChartsAtZero, setStartChartsAtZero] = useState(true);
@@ -40,62 +39,36 @@ const BuildAnalyzerPage: React.FC<RouteComponentProps> = () => {
   const [lde, setLde] = useState(0);
   const [otherLde, setOtherLde] = useState(0);
 
-  const explanations = useAbilityEffects(build, bonusAp, lde);
-  const otherExplanations = useAbilityEffects(
-    otherBuild,
-    otherBonusAp,
-    otherLde
-  );
-
-  function getBuildFromUrl() {
-    const buildToReturn = { ...defaultBuild };
-    const decoded = new URLSearchParams(location.search);
-
-    for (const [key, value] of decoded) {
-      switch (key) {
-        case "weapon":
-          buildToReturn.weapon = value as Weapon;
-          break;
-        case "headgear":
-        case "clothing":
-        case "shoes":
-          const abilityKey = key as "headgear" | "clothing" | "shoes";
-          buildToReturn[abilityKey] = value.split(",") as any;
-      }
-    }
-
-    return buildToReturn;
-  }
+  const explanations = useAbilityEffects({
+    weapon,
+    buildsAbilities: build,
+    bonusAp,
+    lde,
+  });
+  const otherExplanations = useAbilityEffects({
+    weapon,
+    buildsAbilities: otherBuild,
+    bonusAp: otherBonusAp,
+    lde: otherLde,
+  });
 
   return (
     <>
-      <Helmet>
-        <title>{t("navigation;Build Analyzer")} | sendou.ink</title>
-      </Helmet>
       <PageHeader title={t("navigation;Build Analyzer")} />
       <Flex justifyContent="space-between">
-        <Badge variantColor={themeColor}>
-          <Trans i18nKey="analyzer;currentPatch">
-            Patch {{ CURRENT_PATCH }}
-          </Trans>
-        </Badge>
-        <Box color={grayWithShade} fontSize="0.75em">
+        <Badge colorScheme="blue">Patch {CURRENT_PATCH}</Badge>
+        <Box color="gray.500" fontSize="0.75em">
           {t("analyzer;apExplanation")}
         </Box>
       </Flex>
 
       <Box my="1em">
         <WeaponSelector
-          value={build.weapon}
-          label=""
-          setValue={(weapon) => {
-            setBuild({ ...build, weapon });
-            setOtherBuild({ ...otherBuild, weapon });
-          }}
-          menuIsOpen={!build.weapon}
+          value={weapon}
+          setValue={(weapon) => setWeapon(weapon)}
         />
       </Box>
-      {build.weapon && (
+      {weapon && (
         <EditableBuilds
           build={build}
           otherBuild={otherBuild}
@@ -116,7 +89,7 @@ const BuildAnalyzerPage: React.FC<RouteComponentProps> = () => {
           setOtherLde={setOtherLde}
         />
       )}
-      <Button
+      <MyButton
         icon={FaWrench}
         onClick={() => setShowSettings(!showSettings)}
         mt="1em"
@@ -124,12 +97,12 @@ const BuildAnalyzerPage: React.FC<RouteComponentProps> = () => {
         {showSettings
           ? t("analyzer;Hide settings")
           : t("analyzer;Show settings")}
-      </Button>
+      </MyButton>
       {showSettings && (
         <Box my="1em">
           <Switch
             id="show-all"
-            color={themeColor}
+            color="blue"
             isChecked={hideExtra}
             onChange={() => setHideExtra(!hideExtra)}
             mr="0.5em"
@@ -141,7 +114,7 @@ const BuildAnalyzerPage: React.FC<RouteComponentProps> = () => {
           <Box>
             <Switch
               id="show-not-actual"
-              color={themeColor}
+              color="blue"
               isChecked={showNotActualProgress}
               onChange={() => setShowNotActualProgress(!showNotActualProgress)}
               mr="0.5em"
@@ -153,7 +126,7 @@ const BuildAnalyzerPage: React.FC<RouteComponentProps> = () => {
           <Box>
             <Switch
               id="charts-zero"
-              color={themeColor}
+              color="blue"
               isChecked={startChartsAtZero}
               onChange={() => setStartChartsAtZero(!startChartsAtZero)}
               mr="0.5em"

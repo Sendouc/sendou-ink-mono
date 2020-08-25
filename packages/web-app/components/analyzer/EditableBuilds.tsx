@@ -20,7 +20,7 @@ import LdeSlider from "./LdeSlider";
 interface EditableBuildsProps {
   build: Partial<BuildsAbilities>;
   otherBuild: Partial<BuildsAbilities>;
-  setBuild: React.Dispatch<React.SetStateAction<Partial<BuildsAbilities>>>;
+  setBuild: React.Dispatch<React.SetStateAction<BuildsAbilities>>;
   showOther: boolean;
   setShowOther: React.Dispatch<React.SetStateAction<boolean>>;
   otherFocused: boolean;
