@@ -57,14 +57,16 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
   setOtherLde,
 }) => {
   const buildToEdit = otherFocused ? otherBuild : build;
-  const handleChange = (value: Object) =>
-    setBuild({ ...buildToEdit, ...value });
+  const handleChange = (
+    value: Partial<Record<keyof BuildsAbilities, Ability[]>>
+  ) => setBuild({ ...buildToEdit, ...value } as BuildsAbilities);
 
   const handleAbilityButtonClick = (ability: Ability) => {
+    console.log({ ability });
     if (headOnlyAbilities.indexOf(ability as any) !== -1) {
       if (buildToEdit.headgearAbilities![0] === "UNKNOWN") {
         handleChange({
-          headgear: [
+          headgearAbilities: [
             ability,
             buildToEdit.headgearAbilities![1],
             buildToEdit.headgearAbilities![2],
@@ -75,7 +77,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
     } else if (clothingOnlyAbilities.indexOf(ability as any) !== -1) {
       if (buildToEdit.clothingAbilities![0] === "UNKNOWN") {
         handleChange({
-          clothing: [
+          clothingAbilities: [
             ability,
             buildToEdit.clothingAbilities![1],
             buildToEdit.clothingAbilities![2],
@@ -86,7 +88,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
     } else if (shoesOnlyAbilities.indexOf(ability as any) !== -1) {
       if (buildToEdit.shoesAbilities![0] === "UNKNOWN") {
         handleChange({
-          shoes: [
+          shoesAbilities: [
             ability,
             buildToEdit.shoesAbilities![1],
             buildToEdit.shoesAbilities![2],
@@ -100,7 +102,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
         const copy = buildToEdit.headgearAbilities!.slice();
         copy[headI] = ability as HeadOnlyAbility | StackableAbility;
         handleChange({
-          headgear: copy,
+          headgearAbilities: copy,
         });
         return;
       }
@@ -110,7 +112,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
         const copy = buildToEdit.clothingAbilities!.slice();
         copy[clothingI] = ability as ClothingOnlyAbility | StackableAbility;
         handleChange({
-          clothing: copy,
+          clothingAbilities: copy,
         });
         return;
       }
@@ -120,7 +122,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
         const copy = buildToEdit.shoesAbilities!.slice();
         copy[shoesI] = ability as ShoesOnlyAbility | StackableAbility;
         handleChange({
-          shoes: copy,
+          shoesAbilities: copy,
         });
       }
     }
@@ -134,19 +136,19 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
       const copy = buildToEdit.headgearAbilities!.slice();
       copy[index] = "UNKNOWN";
       handleChange({
-        headgear: copy,
+        headgearAbilities: copy,
       });
     } else if (slot === "CLOTHING") {
       const copy = buildToEdit.clothingAbilities!.slice();
       copy[index] = "UNKNOWN";
       handleChange({
-        clothing: copy,
+        clothingAbilities: copy,
       });
     } else {
       const copy = buildToEdit.shoesAbilities!.slice();
       copy[index] = "UNKNOWN";
       handleChange({
-        shoes: copy,
+        shoesAbilities: copy,
       });
     }
   };

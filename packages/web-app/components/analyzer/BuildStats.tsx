@@ -118,11 +118,7 @@ const BuildStats: React.FC<BuildStatsProps> = ({
               </Popover>
             )}
           </Flex>
-          <Box
-            fontWeight="bold"
-            color={`orange.${colorMode === "dark" ? "200" : "500"}`}
-            alignSelf="flex-end"
-          >
+          <Box fontWeight="bold" color="orange.500" alignSelf="flex-end">
             {effect}
           </Box>
         </Flex>
