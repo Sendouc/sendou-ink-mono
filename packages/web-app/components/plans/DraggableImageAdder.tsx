@@ -2,8 +2,8 @@ import { useState } from "react";
 import Draggable from "react-draggable";
 import WeaponImage from "components/common/WeaponImage";
 import { Box, Flex, Image } from "@chakra-ui/core";
-import { weapons, Weapon } from "@sendou-ink/shared";
-import useBgColor from "utils/useBgColor";
+import { weapons } from "@sendou-ink/shared";
+import useColors from "utils/useColors";
 
 interface DraggableImageAdderProps {
   addImageToSketch: (imgSrc: string) => void;
@@ -12,7 +12,7 @@ interface DraggableImageAdderProps {
 const DraggableImageAdder: React.FC<DraggableImageAdderProps> = ({
   addImageToSketch,
 }) => {
-  const bg = useBgColor();
+  const { bg } = useColors();
   const [activeDrags, setActiveDrags] = useState(0);
 
   const onStart = () => {

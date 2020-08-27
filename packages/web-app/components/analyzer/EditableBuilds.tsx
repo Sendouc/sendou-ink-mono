@@ -16,6 +16,7 @@ import MyButton from "components/common/MyButton";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import HeadOnlyToggle from "./HeadOnlyToggle";
 import LdeSlider from "./LdeSlider";
+import useColors from "utils/useColors";
 
 interface EditableBuildsProps {
   build: Partial<BuildsAbilities>;
@@ -56,13 +57,13 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
   setLde,
   setOtherLde,
 }) => {
+  const { colorScheme, secondaryColorScheme } = useColors();
   const buildToEdit = otherFocused ? otherBuild : build;
   const handleChange = (
     value: Partial<Record<keyof BuildsAbilities, Ability[]>>
   ) => setBuild({ ...buildToEdit, ...value } as BuildsAbilities);
 
   const handleAbilityButtonClick = (ability: Ability) => {
-    console.log({ ability });
     if (headOnlyAbilities.indexOf(ability as any) !== -1) {
       if (buildToEdit.headgearAbilities![0] === "UNKNOWN") {
         handleChange({
@@ -180,7 +181,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
           {showOther && (
             <MyButton
               disabled={!otherFocused}
-              color="orange"
+              color={colorScheme}
               onClick={() => changeFocus()}
             >
               {!otherFocused ? "Editing" : "Edit"}
@@ -215,7 +216,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
           <Flex flexDirection="column">
             <MyButton
               disabled={otherFocused}
-              color="blue"
+              colorScheme={secondaryColorScheme}
               onClick={() => changeFocus()}
             >
               {otherFocused ? "Editing" : "Edit"}
@@ -238,6 +239,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
                     [otherHeadAbility]: !otherBonusAp[otherHeadAbility],
                   })
                 }
+                isOther
               />
             )}
             {otherHeadAbility === "LDE" && (

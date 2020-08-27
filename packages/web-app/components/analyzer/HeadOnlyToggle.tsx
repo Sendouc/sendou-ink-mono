@@ -1,17 +1,26 @@
 import { Box, Switch, FormLabel, Flex } from "@chakra-ui/core";
 import AbilityIcon from "components/builds/AbilityIcon";
+import useColors from "utils/useColors";
 
 interface HeadOnlyToggleProps {
   ability: "OG" | "CB";
   active: boolean;
   setActive: () => void;
+  isOther: boolean;
 }
 
 const HeadOnlyToggle: React.FC<HeadOnlyToggleProps> = ({
   ability,
   active,
   setActive,
+  isOther,
 }) => {
+  const {
+    accent,
+    secondaryAccent,
+    colorScheme,
+    secondaryColorScheme,
+  } = useColors();
   return (
     <Flex
       justifyContent="center"
@@ -22,7 +31,7 @@ const HeadOnlyToggle: React.FC<HeadOnlyToggleProps> = ({
       <Box>
         <Switch
           id="show-all"
-          color="blue"
+          colorScheme={isOther ? secondaryColorScheme : colorScheme}
           isChecked={active}
           onChange={() => setActive()}
           mr="0.5em"
@@ -32,7 +41,11 @@ const HeadOnlyToggle: React.FC<HeadOnlyToggleProps> = ({
         </FormLabel>
       </Box>
       {active && ability === "OG" && (
-        <Box color="blue.500" fontWeight="bold" mt="1em">
+        <Box
+          color={isOther ? secondaryAccent : accent}
+          fontWeight="bold"
+          mt="1em"
+        >
           +15AP{" "}
           {["SSU", "RSU", "RES"].map((ability) => (
             <Box as="span" mx="0.2em" key={ability}>
@@ -42,7 +55,11 @@ const HeadOnlyToggle: React.FC<HeadOnlyToggleProps> = ({
         </Box>
       )}
       {active && ability === "CB" && (
-        <Box color="blue.500" fontWeight="bold" mt="1em">
+        <Box
+          color={isOther ? secondaryAccent : accent}
+          fontWeight="bold"
+          mt="1em"
+        >
           +10AP{" "}
           {["ISM", "ISS", "REC", "RSU", "SSU", "SCU"].map((ability) => (
             <Box as="span" mx="0.2em" key={ability}>

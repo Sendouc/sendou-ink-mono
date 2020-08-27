@@ -1,10 +1,10 @@
 import { Flex, Image } from "@chakra-ui/core";
 import Link from "next/link";
-import useBgColor from "utils/useBgColor";
+import useColors from "utils/useColors";
 
 export const navIcons = [
   { name: "builds", isDisabled: true, displayName: "Builds" },
-  { name: "analyzer", isDisabled: true, displayName: "Build Analyzer" },
+  { name: "analyzer", isDisabled: false, displayName: "Build Analyzer" },
   { name: "calendar", isDisabled: true, displayName: "Calendar" },
   { name: "freeagents", isDisabled: true, displayName: "Free Agents" },
   { name: "teams", isDisabled: true, displayName: "Teams" },
@@ -14,10 +14,10 @@ export const navIcons = [
 ] as const;
 
 const IconNavBar = () => {
-  const bg = useBgColor();
+  const { navBg } = useColors();
   return (
     <Flex
-      bg={bg}
+      bg={navBg}
       justifyContent="center"
       py={2}
       display={["none", null, "flex"]}

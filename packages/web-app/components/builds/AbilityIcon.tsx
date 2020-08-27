@@ -15,26 +15,27 @@ interface AbilityIconProps {
   size: "MAIN" | "SUB" | "TINY" | "SUBTINY";
 }
 
-const AbilityIcon: React.FC<AbilityIconProps> = ({ ability, size }) => {
-  return (
-    <Image
-      src={`/images/abilityIcons/${ability}.png`}
-      //fallbackSrc={`/images/abilityIcons/${ability}.webp`}
-      alt={ability}
-      zIndex={2}
-      borderRadius="50%"
-      width={sizeMap[size]}
-      height={sizeMap[size]}
-      background="#000"
-      border="2px solid #888"
-      borderRight="0px"
-      borderBottom="0px"
-      backgroundSize="100%"
-      boxShadow="0 0 0 1px #000"
-      userSelect="none"
-      display="inline-block"
-    />
-  );
-};
+const AbilityIcon: React.FC<AbilityIconProps> = ({ ability, size }) => (
+  <picture
+    style={{
+      zIndex: 2,
+      borderRadius: "50%",
+      width: sizeMap[size],
+      height: sizeMap[size],
+      background: "#000",
+      border: "2px solid #888",
+      borderRight: "0px",
+      borderBottom: "0px",
+      backgroundSize: "100%",
+      boxShadow: "0 0 0 1px #000",
+      userSelect: "none",
+      display: "inline-block",
+    }}
+  >
+    {/*<source srcSet={`/images/abilityIcons/${ability}.webp`} type="image/webp" />*/}
+    <source srcSet={`/images/abilityIcons/${ability}.png`} type="image/png" />
+    <img srcSet={`/images/abilityIcons/${ability}.png`} />
+  </picture>
+);
 
 export default AbilityIcon;

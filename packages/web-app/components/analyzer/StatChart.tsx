@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import useBgColor from "utils/useBgColor";
+import useColors from "utils/useColors";
 
 interface StatChartProps {
   title: string;
@@ -25,7 +25,7 @@ const StatChart: React.FC<StatChartProps> = ({
   getEffect,
   startChartsAtZero,
 }) => {
-  const bg = useBgColor();
+  const { bg, boxShadow } = useColors();
   const getData = () =>
     Array(58)
       .fill(1)
@@ -95,6 +95,7 @@ const StatChart: React.FC<StatChartProps> = ({
             background: bg,
             borderRadius: "5px",
             border: 0,
+            boxShadow,
           }}
         />
         <Legend />

@@ -17,7 +17,7 @@ import {
 } from "@sendou-ink/shared";
 import AbilityIcon from "components/builds/AbilityIcon";
 import StatChart from "./StatChart";
-import useBgColor from "utils/useBgColor";
+import useColors from "utils/useColors";
 
 interface BuildStatsProps {
   explanations: Explanation[];
@@ -85,7 +85,13 @@ const BuildStats: React.FC<BuildStatsProps> = ({
     toggleChart,
     progressBarValue = 0,
   }) => {
-    const bg = useBgColor();
+    const {
+      bg,
+      accent,
+      secondaryAccent,
+      colorScheme,
+      secondaryColorScheme,
+    } = useColors();
 
     return (
       <>
@@ -98,18 +104,16 @@ const BuildStats: React.FC<BuildStatsProps> = ({
               aria-label="Toggle chart"
               icon={<FaChartLine />}
               onClick={() => toggleChart()}
+              isRound
+              variant="ghost"
+              mx="0.5em"
             />
             {title}
             {info && (
               <Popover trigger="hover" placement="top-start">
                 <PopoverTrigger>
                   <Box>
-                    <Box
-                      color="blue.500"
-                      ml="0.2em"
-                      as={FaQuestion}
-                      mb="0.2em"
-                    />
+                    <Box color={accent} ml="0.2em" as={FaQuestion} mb="0.2em" />
                   </Box>
                 </PopoverTrigger>
                 <PopoverContent zIndex={4} p="0.5em" bg={bg} border="0">
@@ -118,31 +122,33 @@ const BuildStats: React.FC<BuildStatsProps> = ({
               </Popover>
             )}
           </Flex>
-          <Box fontWeight="bold" color="orange.500" alignSelf="flex-end">
+          <Box fontWeight="bold" color={accent} alignSelf="flex-end">
             {effect}
           </Box>
         </Flex>
         <Progress
-          color="orange"
+          colorScheme={colorScheme}
           height={otherEffect ? "16px" : "32px"}
           value={progressBarValue}
           hasStripe
           isAnimated
-          bg="orange.100"
         />
         {otherEffect && (
           <>
             <Progress
-              color="blue"
+              colorScheme={secondaryColorScheme}
               height="16px"
               value={otherProgressBarValue}
               hasStripe
               isAnimated
-              bg="blue.100"
             />
             <Flex justifyContent="space-between">
               <Box />
-              <Box fontWeight="bold" color="blue.500" alignSelf="flex-end">
+              <Box
+                fontWeight="bold"
+                color={secondaryAccent}
+                alignSelf="flex-end"
+              >
                 {otherEffect}
               </Box>
             </Flex>

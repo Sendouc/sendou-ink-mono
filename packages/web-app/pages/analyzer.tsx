@@ -10,6 +10,7 @@ import { FaWrench } from "react-icons/fa";
 import MyButton from "components/common/MyButton";
 import t from "utils/mockTranslation";
 import { NextPage } from "next";
+import useColors from "utils/useColors";
 
 const CURRENT_PATCH = "5.3.";
 
@@ -20,6 +21,7 @@ const defaultBuild: BuildsAbilities = {
 };
 
 const BuildAnalyzerPage: NextPage = () => {
+  const { colorScheme, secondaryText } = useColors();
   const [build, setBuild] = useState<BuildsAbilities>({ ...defaultBuild });
   const [otherBuild, setOtherBuild] = useState<BuildsAbilities>({
     ...defaultBuild,
@@ -56,8 +58,8 @@ const BuildAnalyzerPage: NextPage = () => {
     <>
       <PageHeader title={t("navigation;Build Analyzer")} />
       <Flex justifyContent="space-between">
-        <Badge colorScheme="blue">Patch {CURRENT_PATCH}</Badge>
-        <Box color="gray.500" fontSize="0.75em">
+        <Badge colorScheme={colorScheme}>Patch {CURRENT_PATCH}</Badge>
+        <Box color={secondaryText} fontSize="0.75em">
           {t("analyzer;apExplanation")}
         </Box>
       </Flex>
@@ -66,6 +68,8 @@ const BuildAnalyzerPage: NextPage = () => {
         <WeaponSelector
           value={weapon}
           setValue={(weapon) => setWeapon(weapon)}
+          maxW="24rem"
+          mx="auto"
         />
       </Box>
       {weapon && (

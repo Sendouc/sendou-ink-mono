@@ -22,7 +22,7 @@ import {
 } from "react-icons/fa";
 import { AiOutlineLine } from "react-icons/ai";
 import { CirclePicker, ColorResult } from "react-color";
-import useBgColor from "utils/useBgColor";
+import useColors from "utils/useColors";
 import { Tool } from "pages/plans";
 
 interface PlannerColorPickerProps {
@@ -34,7 +34,7 @@ const PlannerColorPicker: React.FC<PlannerColorPickerProps> = ({
   color,
   setColor,
 }) => {
-  const bg = useBgColor();
+  const { bg } = useColors();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Popover placement="bottom" isOpen={isOpen}>

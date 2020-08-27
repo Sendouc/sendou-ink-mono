@@ -1,7 +1,7 @@
 import { SelectProps, Select } from "@chakra-ui/core";
-import useBgColor from "utils/useBgColor";
+import useColors from "utils/useColors";
 
 export const MySelect: React.FC<SelectProps> = (props) => {
-  const bg = useBgColor();
+  const { bg } = useColors();
   return <Select bg={bg} {...props} />;
 };
