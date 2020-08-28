@@ -177,7 +177,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
         {showOther ? "Stop comparing" : "Compare"}
       </MyButton>
       <Flex justifyContent="space-evenly" flexWrap="wrap" mb="1em">
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" pr="1rem">
           {showOther && (
             <MyButton
               leftIcon={!otherFocused ? <FiEdit3 /> : <FiEdit2 />}
