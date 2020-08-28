@@ -2243,7 +2243,7 @@ const useAbilityEffects = ({
 
     setExplanations(newExplanations);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(buildsAbilities), bonusAp, lde]);
+  }, [JSON.stringify(buildsAbilities), bonusAp, lde, weapon]);
 
   return explanations;
 };

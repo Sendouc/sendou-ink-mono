@@ -25,7 +25,7 @@ const StatChart: React.FC<StatChartProps> = ({
   getEffect,
   startChartsAtZero,
 }) => {
-  const { bg, boxShadow } = useColors();
+  const { bg, boxShadow, accent } = useColors();
   const getData = () =>
     Array(58)
       .fill(1)
@@ -102,7 +102,6 @@ const StatChart: React.FC<StatChartProps> = ({
         <Line
           type="monotone"
           dataKey={title}
-          stroke="blue"
           dot={<CustomizedDot />}
           isAnimationActive={false}
         />
