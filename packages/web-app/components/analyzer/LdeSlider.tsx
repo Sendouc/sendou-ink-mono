@@ -7,6 +7,7 @@ import {
   SliderThumb,
 } from "@chakra-ui/core";
 import AbilityIcon from "components/builds/AbilityIcon";
+import useColors from "utils/useColors";
 
 interface LdeSliderProps {
   value: number;
@@ -14,6 +15,7 @@ interface LdeSliderProps {
 }
 
 const LdeSlider: React.FC<LdeSliderProps> = ({ value, setValue }) => {
+  const { colorScheme, accent } = useColors();
   const bonusAp = Math.floor((24 / 21) * value);
 
   const getLdeEffect = () => {
@@ -36,8 +38,9 @@ const LdeSlider: React.FC<LdeSliderProps> = ({ value, setValue }) => {
         onChange={(value: number) => setValue(value)}
         max={21}
       >
-        <SliderTrack bg="blue.100" />
-        <SliderFilledTrack bg="blue" />
+        <SliderTrack>
+          <SliderFilledTrack />
+        </SliderTrack>
         <SliderThumb size={6}>
           <Box minW="30px">
             <AbilityIcon ability="LDE" size="TINY" />
@@ -45,7 +48,7 @@ const LdeSlider: React.FC<LdeSliderProps> = ({ value, setValue }) => {
         </SliderThumb>
       </Slider>
       {value > 0 && (
-        <Box color="blue.500" fontWeight="bold" mt="1em">
+        <Box color={accent} fontWeight="bold" mt="1em">
           +{bonusAp}
           AP{" "}
           {["ISM", "ISS", "REC"].map((ability) => (

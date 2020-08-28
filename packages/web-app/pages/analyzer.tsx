@@ -6,11 +6,11 @@ import PageHeader from "components/common/PageHeader";
 import WeaponSelector from "components/common/WeaponSelector";
 import BuildStats from "components/analyzer/BuildStats";
 import EditableBuilds from "components/analyzer/EditableBuilds";
-import { FaWrench } from "react-icons/fa";
 import MyButton from "components/common/MyButton";
 import t from "utils/mockTranslation";
 import { NextPage } from "next";
 import useColors from "utils/useColors";
+import { FiSettings } from "react-icons/fi";
 
 const CURRENT_PATCH = "5.3.";
 
@@ -94,7 +94,7 @@ const BuildAnalyzerPage: NextPage = () => {
         />
       )}
       <MyButton
-        icon={FaWrench}
+        leftIcon={<FiSettings />}
         onClick={() => setShowSettings(!showSettings)}
         mt="1em"
       >

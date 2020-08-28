@@ -6,7 +6,7 @@ interface HeadOnlyToggleProps {
   ability: "OG" | "CB";
   active: boolean;
   setActive: () => void;
-  isOther: boolean;
+  isOther?: boolean;
 }
 
 const HeadOnlyToggle: React.FC<HeadOnlyToggleProps> = ({
@@ -36,16 +36,12 @@ const HeadOnlyToggle: React.FC<HeadOnlyToggleProps> = ({
           onChange={() => setActive()}
           mr="0.5em"
         />
-        <FormLabel htmlFor="show-all">
+        <FormLabel htmlFor="show-all" mt={2}>
           <AbilityIcon ability={ability} size="TINY" />
         </FormLabel>
       </Box>
       {active && ability === "OG" && (
-        <Box
-          color={isOther ? secondaryAccent : accent}
-          fontWeight="bold"
-          mt="1em"
-        >
+        <Box color={isOther ? secondaryAccent : accent} fontWeight="bold">
           +15AP{" "}
           {["SSU", "RSU", "RES"].map((ability) => (
             <Box as="span" mx="0.2em" key={ability}>
@@ -55,11 +51,7 @@ const HeadOnlyToggle: React.FC<HeadOnlyToggleProps> = ({
         </Box>
       )}
       {active && ability === "CB" && (
-        <Box
-          color={isOther ? secondaryAccent : accent}
-          fontWeight="bold"
-          mt="1em"
-        >
+        <Box color={isOther ? secondaryAccent : accent} fontWeight="bold">
           +10AP{" "}
           {["ISM", "ISS", "REC", "RSU", "SSU", "SCU"].map((ability) => (
             <Box as="span" mx="0.2em" key={ability}>

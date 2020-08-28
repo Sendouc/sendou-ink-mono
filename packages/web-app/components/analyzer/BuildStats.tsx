@@ -96,8 +96,8 @@ const BuildStats: React.FC<BuildStatsProps> = ({
     return (
       <>
         <Flex justifyContent="space-between">
-          <Flex fontWeight="bold" mr="1em" mb="0.5em" alignItems="center">
-            <Box mr="0.5em" minW="30px">
+          <Flex mr="1em" mb="0.5em" alignItems="center">
+            <Box mr="0.2em" minW="30px">
               <AbilityIcon ability={ability} size="TINY" />
             </Box>
             <IconButton
@@ -122,7 +122,7 @@ const BuildStats: React.FC<BuildStatsProps> = ({
               </Popover>
             )}
           </Flex>
-          <Box fontWeight="bold" color={accent} alignSelf="flex-end">
+          <Box color={accent} alignSelf="flex-end">
             {effect}
           </Box>
         </Flex>
@@ -144,11 +144,7 @@ const BuildStats: React.FC<BuildStatsProps> = ({
             />
             <Flex justifyContent="space-between">
               <Box />
-              <Box
-                fontWeight="bold"
-                color={secondaryAccent}
-                alignSelf="flex-end"
-              >
+              <Box color={secondaryAccent} alignSelf="flex-end">
                 {otherEffect}
               </Box>
             </Flex>

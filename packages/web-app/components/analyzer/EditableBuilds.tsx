@@ -13,10 +13,10 @@ import {
   shoesOnlyAbilities,
 } from "@sendou-ink/shared";
 import MyButton from "components/common/MyButton";
-import { FaPlus, FaMinus } from "react-icons/fa";
 import HeadOnlyToggle from "./HeadOnlyToggle";
 import LdeSlider from "./LdeSlider";
 import useColors from "utils/useColors";
+import { FiEdit3, FiEdit2, FiSquare, FiCopy } from "react-icons/fi";
 
 interface EditableBuildsProps {
   build: Partial<BuildsAbilities>;
@@ -164,7 +164,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
   return (
     <>
       <MyButton
-        icon={showOther ? FaMinus : FaPlus}
+        leftIcon={showOther ? <FiSquare /> : <FiCopy />}
         onClick={() => {
           if (showOther && otherFocused) {
             changeFocus();
@@ -180,8 +180,9 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
         <Flex flexDirection="column">
           {showOther && (
             <MyButton
+              leftIcon={!otherFocused ? <FiEdit3 /> : <FiEdit2 />}
               disabled={!otherFocused}
-              color={colorScheme}
+              colorScheme={colorScheme}
               onClick={() => changeFocus()}
             >
               {!otherFocused ? "Editing" : "Edit"}
@@ -215,6 +216,7 @@ const EditableBuilds: React.FC<EditableBuildsProps> = ({
         {showOther && (
           <Flex flexDirection="column">
             <MyButton
+              leftIcon={otherFocused ? <FiEdit3 /> : <FiEdit2 />}
               disabled={otherFocused}
               colorScheme={secondaryColorScheme}
               onClick={() => changeFocus()}
