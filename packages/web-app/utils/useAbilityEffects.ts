@@ -32,7 +32,6 @@ interface useAbilityEffectsArgs {
 }
 
 function buildToAP({
-  weapon,
   buildsAbilities,
   bonusAp,
   lde,
@@ -554,7 +553,13 @@ const useAbilityEffects = ({
     ];
   }
 
-  function calculateSS(amount: number) {
+  function calculateSS(amountBeforeRP: number) {
+    const respawnPunishAPMultiplier =
+      buildsAbilities.clothingAbilities[0] === "RP" ? 0.7 : 1;
+    const respawnPunishEffectMultiplier =
+      buildsAbilities.clothingAbilities[0] === "RP" ? 0.775 : 1;
+    const amount = Math.floor(amountBeforeRP * respawnPunishAPMultiplier);
+
     const SS = abilityJson["Special Saver"];
 
     const high = SS.SpecialRt_Restart_High;
@@ -562,17 +567,18 @@ const useAbilityEffects = ({
     const low = SS.SpecialRt_Restart_Low;
     const highMidLow = [high, mid, low];
 
-    const effect = getEffect(highMidLow, amount);
+    const [specialLostBeforeRP, effectFromMax] = getEffect(highMidLow, amount);
+    const specialLost = specialLostBeforeRP * respawnPunishEffectMultiplier;
 
     const toReturn = [];
 
     toReturn.push({
       title: t("analyzer;Special lost when killed"),
-      effect: `${parseFloat(((1.0 - effect[0]) * 100).toFixed(2))}% ${t(
+      effect: `${parseFloat(((1.0 - specialLost) * 100).toFixed(2))}% ${t(
         "analyzer;of the charge"
       )}`,
-      effectFromMax: effect[1],
-      effectFromMaxActual: (1.0 - effect[0]) * 100,
+      effectFromMax,
+      effectFromMaxActual: (1.0 - specialLost) * 100,
       ability: "SS" as Ability,
       ap: amount,
       getEffect: (ap: number) =>
@@ -585,9 +591,10 @@ const useAbilityEffects = ({
       const low = SS.SpecialRt_Restart_SuperLanding_Low;
       const highMidLow = [high, mid, low];
 
-      const effect = getEffect(highMidLow, amount);
+      const [specialLostBeforeRP] = getEffect(highMidLow, amount);
+      const specialLost = specialLostBeforeRP * respawnPunishEffectMultiplier;
 
-      const lost = effect[0] > 1 ? 1 : effect[0];
+      const lost = specialLost > 1 ? 1 : specialLost;
       const effectAtZero = getEffect(highMidLow, 0);
       const fromMax = (lost - effectAtZero[0]) / 0.25;
 
@@ -959,7 +966,11 @@ const useAbilityEffects = ({
     const highMidLowChase = [highChase, midChase, lowChase];
     const effectChase = getEffect(highMidLowChase, amount);
 
-    const totalFrames = Math.ceil(150 + effectAround[0] + effectChase[0]);
+    const respawnPunishExtraFrames =
+      buildsAbilities.clothingAbilities[0] === "RP" ? 68 : 0;
+    const totalFrames =
+      Math.ceil(150 + effectAround[0] + effectChase[0]) +
+      respawnPunishExtraFrames;
 
     const effectAtZero = Math.ceil(
       150 + getEffect(highMidLowAround, 0)[0] + getEffect(highMidLowChase, 0)[0]
