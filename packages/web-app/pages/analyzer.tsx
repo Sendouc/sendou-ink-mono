@@ -64,7 +64,8 @@ const BuildAnalyzerPage: NextPage = () => {
           value={weapon}
           setValue={(weapon) => setWeapon(weapon)}
           maxW="24rem"
-          mx="auto"
+          size="lg"
+          showImage
         />
       </Box>
       <Wrap justify="space-between">
@@ -97,8 +98,7 @@ const BuildAnalyzerPage: NextPage = () => {
           <MyButton
             leftIcon={<FiSettings />}
             onClick={() => setShowSettings(!showSettings)}
-            mt="2rem"
-            mb="1rem"
+            my="1rem"
           >
             {showSettings
               ? t("analyzer;Hide settings")
@@ -145,7 +145,7 @@ const BuildAnalyzerPage: NextPage = () => {
               </Box>
             </Box>
           )}
-          <Box m="1rem" maxW="30rem">
+          <Box m="1rem" w={["95%", null, "30rem"]}>
             <BuildStats
               build={build}
               explanations={explanations}

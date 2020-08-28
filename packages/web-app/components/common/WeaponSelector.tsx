@@ -1,19 +1,22 @@
 import React from "react";
 import { MySelect } from "./MySelect";
 import { weapons, Weapon } from "@sendou-ink/shared";
-import { SelectProps } from "@chakra-ui/core";
+import { SelectProps, Flex } from "@chakra-ui/core";
+import WeaponImage from "./WeaponImage";
 
 interface WeaponSelectorProps {
   value: Weapon;
   setValue: (weapon: Weapon) => void;
+  showImage?: boolean;
 }
 
 const WeaponSelector: React.FC<WeaponSelectorProps & SelectProps> = ({
   value,
   setValue,
+  showImage,
   ...props
 }) => {
-  return (
+  const weaponSelect = (
     <MySelect
       value={value}
       onChange={(e) => setValue(e.target.value as Weapon)}
@@ -26,6 +29,17 @@ const WeaponSelector: React.FC<WeaponSelectorProps & SelectProps> = ({
       ))}
     </MySelect>
   );
+
+  if (showImage) {
+    return (
+      <Flex alignItems="center">
+        {weaponSelect}
+        <WeaponImage name={value} w="2rem" h="2rem" ml="1rem" />
+      </Flex>
+    );
+  }
+
+  return weaponSelect;
 };
 
 export default WeaponSelector;
