@@ -499,12 +499,10 @@ const useAbilityEffects = ({
     const low = SSU[lowKey];
     const highMidLow = [high, mid, low];
 
-    const effect = getEffect(highMidLow, amount);
+    const hasNinjaSquid = buildsAbilities.clothingAbilities![0] === "NS";
+    const effect = getEffect(highMidLow, amount, hasNinjaSquid);
 
-    const speed =
-      buildsAbilities.clothingAbilities![0] === "NS"
-        ? effect[0] * 0.9
-        : effect[0];
+    const speed = hasNinjaSquid ? effect[0] * 0.9 : effect[0];
 
     return [
       {
