@@ -1495,6 +1495,49 @@ const useAbilityEffects = ({
     }
 
     if (
+      buildWeaponData.mSideStepOneMuzzleDamageRate_MWPUG_High_2 &&
+      buildWeaponData.mSideStepOneMuzzleDamageRate_MWPUG_Mid_2 &&
+      buildWeaponData.mSideStepOneMuzzleDamageMax_2 &&
+      buildWeaponData.mSideStepOneMuzzleDamage_MWPUG_Max_2 &&
+      buildWeaponData.mSideStepOneMuzzleDamageRate_MWPUG_High_2 !==
+        buildWeaponData.mSideStepOneMuzzleDamageRate_MWPUG_Mid_2
+    ) {
+      const high = buildWeaponData.mSideStepOneMuzzleDamageRate_MWPUG_High_2;
+      const mid = buildWeaponData.mSideStepOneMuzzleDamageRate_MWPUG_Mid_2;
+      const low = 1.0;
+      const highMidLow = [high, mid, low];
+
+      const effect = getEffect(highMidLow, amount);
+      const baseDamageMax = buildWeaponData.mSideStepOneMuzzleDamageMax_2;
+      const damageMax = calculateDamage(
+        baseDamageMax,
+        effect[0],
+        buildWeaponData.mSideStepOneMuzzleDamage_MWPUG_Max_2
+      );
+      const baseDamageMin = buildWeaponData.mSideStepOneMuzzleDamageMin_2 ?? -1;
+      const damageMin = calculateDamage(
+        baseDamageMin,
+        effect[0],
+        buildWeaponData.mSideStepOneMuzzleDamage_MWPUG_Max_2
+      );
+      const damageMinStr = baseDamageMin !== -1 ? `${damageMin} - ` : "";
+      toReturn.push({
+        title: `${weaponTranslated} damage per shot (turret mode)`,
+        effect: `${damageMinStr}${damageMax}`,
+        effectFromMax: effect[1],
+        effectFromMaxActual: damageMax,
+        ability: "MPU" as Ability,
+        ap: amount,
+        getEffect: (ap: number) =>
+          calculateDamage(
+            baseDamageMax,
+            getEffect(highMidLow, ap)[0],
+            buildWeaponData.mSideStepOneMuzzleDamage_MWPUG_Max_2
+          ),
+      });
+    }
+
+    if (
       buildWeaponData.mSplashPaintRadius_MWPUG_High &&
       buildWeaponData.mSplashPaintRadius_MWPUG_Mid &&
       buildWeaponData.mSplashPaintRadius &&
