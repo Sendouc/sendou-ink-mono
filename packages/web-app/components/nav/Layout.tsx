@@ -13,9 +13,9 @@ import {
   Heading,
   Flex,
 } from "@chakra-ui/core";
-import useBgColor from "utils/useBgColor";
 import { FiMenu } from "react-icons/fi";
 import Link from "next/link";
+import useColors from "utils/useColors";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const bg = useBgColor();
+  const { bg } = useColors();
 
   return (
     <>

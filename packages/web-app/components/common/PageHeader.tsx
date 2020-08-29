@@ -7,7 +7,7 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
   return (
     <>
-      <Heading pl="5px" mb="0.5em" fontWeight="bold">
+      <Heading mb="0.5em" fontWeight="bold">
         {title}
       </Heading>
     </>
