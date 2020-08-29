@@ -91,7 +91,7 @@ const DraggableToolsSelector: React.FC<DraggableToolsSelectorProps> = ({
   color,
   setColor,
 }) => {
-  const bg = useBgColor();
+  const { bg } = useColors();
   const [activeDrags, setActiveDrags] = useState(0);
   useHotkeys("p", () => setTool("pencil"));
   useHotkeys("l", () => setTool("line"));
