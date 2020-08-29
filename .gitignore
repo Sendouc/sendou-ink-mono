@@ -16,6 +16,8 @@ node_modules/
 # misc
 .DS_Store
 *.pem
+/packages/scripts/input/
+/packages/scripts/output/
 
 # debug
 npm-debug.log*
