@@ -289,7 +289,7 @@ const useAbilityEffects = ({
       });
     }
 
-    const mSideStepInkConsume = buildWeaponData.mSideStepInkConsume;
+    const mSideStepInkConsume = buildWeaponData.mSideStepInkConsume_2;
     if (mSideStepInkConsume) {
       toReturn.push({
         title: t("analyzer;Dodge roll ink consumption"),
