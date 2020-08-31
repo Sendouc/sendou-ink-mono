@@ -6,8 +6,8 @@
   "dependencies": {
     "@sendou-ink/shared": "1.0.0",
     "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0",
-    "ts-node": "^9.0.0",
+    "dotenv-flow": "^3.2.0",
+    "ts-node-dev": "^1.0.0-pre.61",
     "typescript": "^4.0.2"
   }
 }
