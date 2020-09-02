@@ -3,6 +3,7 @@ require("dotenv-flow").config({ path: "../.." });
 import * as Discord from "discord.js";
 import * as commands from "./commands";
 import onNewMessage from "./onNewMessage";
+import ids from "./utils/ids";
 
 const DEFAULT_PREFIX = "!" as const;
 
@@ -32,6 +33,10 @@ client.on("message", async (msg) => {
   // on these channels normal commands don't work
   if (action) {
     action();
+    return;
+  }
+
+  if (msg.channel.id !== ids.channels.sroBot) {
     return;
   }
 
